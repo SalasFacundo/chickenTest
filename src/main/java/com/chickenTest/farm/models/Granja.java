@@ -3,11 +3,19 @@ package com.chickenTest.farm.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="granja")
 public class Granja {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")	
+	private Long id;
 	
 	@Column(name="nombre")	
 	private String nombre;

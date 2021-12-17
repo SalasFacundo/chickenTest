@@ -22,6 +22,7 @@ public class GranjaDaoImp implements GranjaDao{
 	public List<Granja> getDatos() {
 		String query="FROM Granja"; 
 		
+		System.out.println(entityManager.createQuery(query).getResultList());
 		return entityManager.createQuery(query).getResultList();
 	}
 
