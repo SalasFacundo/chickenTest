@@ -1,5 +1,68 @@
 package com.chickenTest.farm.models;
 
-public class Granja {
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="granja")
+public class Granja {
+	
+	@Column(name="nombre")	
+	private String nombre;
+	
+	@Column(name="dinero")	
+	private double dinero;
+	
+	@Column(name="capacidadHuevos")	
+	private int capacidadHuevos;
+	
+	@Column(name="capacidadPollos")	
+	private int capacidadPollos;
+	
+	@Column(name="precioVentaPollo")	
+	private double precioVentaPollo;
+	
+	@Column(name="precioVentaHuevo")	
+	private double precioVentaHuevo;
+	
+	
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getDinero() {
+		return dinero;
+	}
+
+	public void setDinero(double dinero) {
+		this.dinero = dinero;
+	}
+
+	public int getCapacidadHuevos() {
+		return capacidadHuevos;
+	}
+
+	public void setCapacidadHuevos(int capacidadHuevos) {
+		this.capacidadHuevos = capacidadHuevos;
+	}
+
+	public int getCapacidadPollos() {
+		return capacidadPollos;
+	}
+
+	public void setCapacidadPollos(int capacidadPollos) {
+		this.capacidadPollos = capacidadPollos;
+	}
+
+	
 }
