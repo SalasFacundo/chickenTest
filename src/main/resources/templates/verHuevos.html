@@ -45,19 +45,34 @@
         <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Comprar&nbsp;</h2>
+                    <h2 class="text-info">Huevos</h2>
+                    <p>Aquí podrá visualizar la cantidad de productos organizados por dias de vida</p>
                 </div>
-                <form>
-                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Precio</label><input class="form-control" type="text" id="subject" name="subject"></div>
-                    <div class="mb-3"><label class="form-label" for="email">Nacimiento</label><input class="form-control" type="date"></div>
-                    <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select">
-                            <option value="&quot;pollo&quot;" selected="">Pollo</option>
-                            <option value="&quot;huevo&quot;">Huevo</option>
-                        </select></div>
-                    <div class="mb-3"></div>
-                    <div class="mb-3"><button class="btn btn-primary" type="submit">Comprar</button></div>
-                </form>
+                <div><table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Dias de vida</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                
+            </tr>
+        </thead>
+        <tbody>           
+           
+            <tr>
+                <td>20</td>
+                <td>Huevo</td>
+                <td>2</td>           
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Huevo</td>
+                <td>1</td>
+                
+            </tr>
+            
+        </tbody>
+    </table></div>
             </div>
         </section>
     </main>
