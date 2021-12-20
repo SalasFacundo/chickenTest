@@ -36,13 +36,51 @@ public class GranjaController {
 		return granjaDao.datos();
 	}
 	
+	
+	@RequestMapping(value = "/comprar")
+	public String comprar(Model model)
+	{
+		return "comprar";
+	}
+	
+	@RequestMapping(value = "/granja")
+	public String granja(Model model)
+	{
+		return "granja";
+	}
+	
+	@RequestMapping(value = "/index")
+	public String index(Model model)
+	{
+		return "index";
+	}
+	
+	@RequestMapping(value = "/modificarGranja")
+	public String modificarGranja(Model model)
+	{
+		return "modificarGranja";
+	}
+	
 	@RequestMapping(value = "/vender")
 	public String vender(Model model)
-	{	
-	
-		
+	{
 		return "vender";
 	}
+	
+	@RequestMapping(value = "/verHuevos")
+	public String verHuevos(Model model)
+	{
+		return "verHuevos";
+	}	
+	
+	@RequestMapping(value = "/verPollos")
+	public String verPollos(Model model)
+	{
+		return "verPollos";
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/form")
 	public String crear(Map<String, Object> model) {
