@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.chickenTest.farm.dao.GranjaDao;
-import com.chickenTest.farm.models.Cliente;
 import com.chickenTest.farm.models.Granja;
 
 
@@ -39,7 +38,7 @@ public class GranjaController {
 	
 	@RequestMapping(value = "/comprar")
 	public String comprar(Model model)
-	{
+	{		
 		return "comprar";
 	}
 	
@@ -80,16 +79,7 @@ public class GranjaController {
 	}
 	
 	
-	
-	
-	@RequestMapping(value = "/form")
-	public String crear(Map<String, Object> model) {
 
-		Cliente cliente = new Cliente();
-		model.put("cliente", cliente);
-		model.put("titulo", "Formulario de Cliente");
-		return "form";
-	}
 	
 	@RequestMapping(value="/procesarVenta")
 	public String procesarVenta(HttpServletRequest request, Model model)
