@@ -39,6 +39,7 @@ public class GranjaController {
 	@RequestMapping(value = "/comprar")
 	public String comprar(Model model)
 	{		
+		System.out.println(granjaDao.datos());
 		return "comprar";
 	}
 	

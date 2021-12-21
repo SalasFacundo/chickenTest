@@ -38,6 +38,51 @@ public class Granja {
 	
 	
 	
+	
+	public Granja(String nombre, double dinero, int capacidadHuevos, int capacidadPollos, double precioVentaPollo,
+			double precioVentaHuevo) {
+		
+		this.nombre = nombre;
+		this.dinero = dinero;
+		this.capacidadHuevos = capacidadHuevos;
+		this.capacidadPollos = capacidadPollos;
+		this.precioVentaPollo = precioVentaPollo;
+		this.precioVentaHuevo = precioVentaHuevo;
+	}
+	
+	
+	
+
+
+
+	public Granja() {
+		
+	}
+
+	
+	
+
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -70,6 +115,42 @@ public class Granja {
 
 	public void setCapacidadPollos(int capacidadPollos) {
 		this.capacidadPollos = capacidadPollos;
+	}
+
+
+
+
+
+
+	public double getPrecioVentaPollo() {
+		return precioVentaPollo;
+	}
+
+
+
+
+
+
+	public void setPrecioVentaPollo(double precioVentaPollo) {
+		this.precioVentaPollo = precioVentaPollo;
+	}
+
+
+
+
+
+
+	public double getPrecioVentaHuevo() {
+		return precioVentaHuevo;
+	}
+
+
+
+
+
+
+	public void setPrecioVentaHuevo(double precioVentaHuevo) {
+		this.precioVentaHuevo = precioVentaHuevo;
 	}
 
 	

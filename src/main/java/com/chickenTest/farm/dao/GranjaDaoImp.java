@@ -2,8 +2,7 @@ package com.chickenTest.farm.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,38 +10,67 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chickenTest.farm.models.Granja;
 
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 @Repository
 @Transactional
 public class GranjaDaoImp implements GranjaDao{
-	
-	@PersistenceContext
-	private EntityManager entityManager;
-	
-	@Override
-	public List<Granja> getDatos() {
-		String query="FROM Granja"; 
-		
-		System.out.println(entityManager.createQuery(query).getResultList());	
-		return entityManager.createQuery(query).getResultList();
-	}
 
 	
-
-	@Override
-	public void editar(Granja granja) {
-		
-		entityManager.merge(granja);
-		
-	}
-
-
-
+	
+	
+	
+	
 	@Override
 	public List<Granja> datos() {
 		
-		String query="FROM Granja"; 		
-		return entityManager.createQuery(query).getResultList();
+		SessionFactory miFactory= new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Granja.class).buildSessionFactory();
+		
+		Session miSession= miFactory.openSession();   
+		
+		
+		try {
+			miSession.beginTransaction();
+			
+			//CONSULTA DE CLIENTES
+			
+			List<Granja> datosGranja= miSession.createQuery("from Granja").getResultList();
+			
+			//MOSTRAR LOS CLIENTES
+			
+			for (Granja granja : datosGranja) {
+				System.out.println(granja);
+			}
+			
+			
+			
+			
+			miSession.getTransaction().commit();
+			
+			//CERRAR SEESION
+			miSession.close();
+			//
+		} catch (Exception e) {
+			miFactory.close();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public void editar(Granja granja) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Granja> getDatos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }
