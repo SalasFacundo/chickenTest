@@ -2,11 +2,20 @@ package com.chickenTest.farm.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.chickenTest.farm.models.Granja;
 
-public interface GranjaDao {
+public interface GranjaDao extends JpaRepository<Granja, Integer>{
 
-	public List<Granja> datos();
-	public void editar(Granja granja);
-	public List<Granja> getDatos();
+	
 }
+
+
+
+
+
+
+
+
+

@@ -28,18 +28,20 @@ public class GranjaController {
 	
 	
 	
-	
+	/*
 	@RequestMapping(value="api/granja")
 	public List<Granja> getGranja()
 	{				
 		return granjaDao.datos();
-	}
+	}*/
 	
 	
 	@RequestMapping(value = "/comprar")
 	public String comprar(Model model)
 	{		
-		System.out.println(granjaDao.datos());
+		System.out.println("aca abajo");
+		System.out.println(granjaDao.findAll());
+		System.out.println("aca arria");
 		return "comprar";
 	}
 	
