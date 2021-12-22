@@ -1,4 +1,4 @@
-package com.chickenTest.farm.models;
+package com.sistema.inventario.models;
 
 
 import javax.persistence.Column;
@@ -17,22 +17,22 @@ public class Granja {
 	@Column(name="id")	
 	private Long id;
 	
-	@Column(name="nombre")	
+	@Column(name="nombre", length=50, nullable=false)	
 	private String nombre;
 	
-	@Column(name="dinero")	
+	@Column(name="dinero", length=50, nullable=false)	
 	private double dinero;
 	
-	@Column(name="capacidadHuevos")	
+	@Column(name="capacidadHuevos", length=50, nullable=false)	
 	private int capacidadHuevos;
 	
-	@Column(name="capacidadPollos")	
+	@Column(name="capacidadPollos", length=50, nullable=false)	
 	private int capacidadPollos;
 	
-	@Column(name="precioVentaPollo")	
+	@Column(name="precioVentaPollo", length=50, nullable=false)	
 	private double precioVentaPollo;
 	
-	@Column(name="precioVentaHuevo")	
+	@Column(name="precioVentaHuevo", length=50, nullable=false)	
 	private double precioVentaHuevo;
 	
 	
@@ -152,6 +152,20 @@ public class Granja {
 	public void setPrecioVentaHuevo(double precioVentaHuevo) {
 		this.precioVentaHuevo = precioVentaHuevo;
 	}
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Granja [id=" + id + ", nombre=" + nombre + ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos
+				+ ", capacidadPollos=" + capacidadPollos + ", precioVentaPollo=" + precioVentaPollo
+				+ ", precioVentaHuevo=" + precioVentaHuevo + "]";
+	}
+	
+	
 
 	
 }

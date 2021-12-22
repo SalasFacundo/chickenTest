@@ -1,4 +1,5 @@
-package com.chickenTest.farm.controllers;
+package com.sistema.inventario.controller;
+
 
 import java.util.List;
 import java.util.Map;
@@ -8,74 +9,69 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.chickenTest.farm.dao.GranjaDao;
-import com.chickenTest.farm.models.Granja;
-
+import com.sistema.inventario.dao.IGranjaRepository;
+import com.sistema.inventario.models.Granja;
 
 
 @Controller
 public class GranjaController {
 	
 	@Autowired
-	private GranjaDao granjaDao;
+	private IGranjaRepository granjaRepository;
+
 	
-	
-	
-	/*
-	@RequestMapping(value="api/granja")
-	public List<Granja> getGranja()
-	{				
-		return granjaDao.datos();
-	}*/
-	
-	
-	@RequestMapping(value = "/comprar")
+	@GetMapping(value = "/comprar")
 	public String comprar(Model model)
 	{		
-		System.out.println("aca abajo");
-		System.out.println(granjaDao.findAll());
-		System.out.println("aca arria");
+		Granja granja1= new Granja("Pollos Hermanos", 123456789, 20, 10, 500, 100 );
+		
+		//granjaRepository.save(granja1);
+		List<Granja> listaGranja= granjaRepository.findAll();
+		System.out.println(listaGranja);
+		
+		
 		return "comprar";
 	}
 	
-	@RequestMapping(value = "/granja")
+	@GetMapping(value = "/granja")
 	public String granja(Model model)
 	{
 		return "granja";
 	}
 	
-	@RequestMapping(value = "/index")
+	@GetMapping(value = "/index")
 	public String index(Model model)
 	{
 		return "index";
 	}
 	
-	@RequestMapping(value = "/modificarGranja")
+	@GetMapping(value = "/modificarGranja")
 	public String modificarGranja(Model model)
 	{
 		return "modificarGranja";
 	}
 	
-	@RequestMapping(value = "/vender")
+	@GetMapping(value = "/vender")
 	public String vender(Model model)
 	{
 		return "vender";
 	}
 	
-	@RequestMapping(value = "/verHuevos")
+	@GetMapping(value = "/verHuevos")
 	public String verHuevos(Model model)
 	{
 		return "verHuevos";
 	}	
 	
-	@RequestMapping(value = "/verPollos")
+	@GetMapping(value = "/verPollos")
 	public String verPollos(Model model)
 	{
 		return "verPollos";
@@ -84,7 +80,7 @@ public class GranjaController {
 	
 
 	
-	@RequestMapping(value="/procesarVenta")
+	@PostMapping(value="/procesarVenta")
 	public String procesarVenta(HttpServletRequest request, Model model)
 	{	
 		System.out.println("entra");
@@ -105,14 +101,15 @@ public class GranjaController {
 			System.out.println(producto);
 		}
 		
-		
-		return "vender";
+		return "redirect:/vender";
+	
 	}
 	
 	
 	
 
 }
+
 
 
 
