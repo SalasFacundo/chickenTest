@@ -1,4 +1,4 @@
-package com.sistema.inventario.controller;
+package com.chickenTest.farm.controllers;
 
 
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sistema.inventario.dao.IGranjaRepository;
-import com.sistema.inventario.models.Granja;
+import com.chickenTest.farm.dao.IGranjaRepository;
+import com.chickenTest.farm.models.Granja;
 
 
 @Controller

@@ -1,4 +1,4 @@
-package com.sistema.inventario.models;
+package com.chickenTest.farm.models;
 
 
 import javax.persistence.Column;
