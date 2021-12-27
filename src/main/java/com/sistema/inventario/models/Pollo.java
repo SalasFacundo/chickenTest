@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="huevo")
-public class Huevo {
-	
+@Table(name="pollo")
+public class Pollo {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")	
@@ -21,55 +21,20 @@ public class Huevo {
 	private int dias;
 
 
-	public Huevo(Long id) {
-		
-		this.id = id;
-	}
-
-
-	
-
-	public Huevo(Long id, int dias) {
-		
+	public Pollo(Long id, int dias) {
 		this.id = id;
 		this.dias = dias;
 	}
-	
-	public Huevo() {
-		
-		
-	}
 
 
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-
-
-	public void setId(Long id) {
+	public Pollo(Long id) {
 		this.id = id;
 	}
 
 
-
-
-	public int getDias() {
-		return dias;
-	}
-
-
-
-
-	public void setDias(int dias) {
+	public Pollo(int dias) {
 		this.dias = dias;
 	}
 	
 	
-	
-	
-
 }
