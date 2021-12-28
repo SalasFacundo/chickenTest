@@ -47,6 +47,12 @@ public class Granja {
 	@Column(name="precioCompraHuevo", length=50, nullable=false)	
 	private double precioCompraHuevo;
 	
+	@Column(name="diasDeCompraPollo", length=50, nullable=false)	
+	private int diasDeCompraPollo;
+	
+	@Column(name="diasDeCompraHuevo", length=50, nullable=false)	
+	private int diasDeCompraHuevo;
+	
 	
 	
 
@@ -55,6 +61,12 @@ public class Granja {
 
 	
 
+
+
+
+
+
+	
 
 
 
@@ -62,8 +74,8 @@ public class Granja {
 
 	public Granja(Long id, String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
 			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
-			double precioCompraHuevo) {
-		
+			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
+		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.telefono = telefono;
@@ -75,16 +87,23 @@ public class Granja {
 		this.precioVentaHuevo = precioVentaHuevo;
 		this.precioCompraPollo = precioCompraPollo;
 		this.precioCompraHuevo = precioCompraHuevo;
+		this.diasDeCompraPollo = diasDeCompraPollo;
+		this.diasDeCompraHuevo = diasDeCompraHuevo;
 	}
 
 
 
 
+	
+
+	
+
+
 
 	public Granja(String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
 			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
-			double precioCompraHuevo) {
-		
+			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
+		super();
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -95,9 +114,16 @@ public class Granja {
 		this.precioVentaHuevo = precioVentaHuevo;
 		this.precioCompraPollo = precioCompraPollo;
 		this.precioCompraHuevo = precioCompraHuevo;
+		this.diasDeCompraPollo = diasDeCompraPollo;
+		this.diasDeCompraHuevo = diasDeCompraHuevo;
 	}
 
-	
+
+
+
+
+
+
 
 
 
@@ -280,6 +306,58 @@ public class Granja {
 	}
 
 
+	
+
+
+	public int getDiasDeCompraPollo() {
+		return diasDeCompraPollo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDiasDeCompraPollo(int diasDeCompraPollo) {
+		this.diasDeCompraPollo = diasDeCompraPollo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public int getDiasDeCompraHuevo() {
+		return diasDeCompraHuevo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDiasDeCompraHuevo(int diasDeCompraHuevo) {
+		this.diasDeCompraHuevo = diasDeCompraHuevo;
+	}
+
+
+
+
+
+
+
 
 
 
@@ -288,8 +366,19 @@ public class Granja {
 		return "Granja [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion
 				+ ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos + ", capacidadPollos=" + capacidadPollos
 				+ ", precioVentaPollo=" + precioVentaPollo + ", precioVentaHuevo=" + precioVentaHuevo
-				+ ", precioCompraPollo=" + precioCompraPollo + ", precioCompraHuevo=" + precioCompraHuevo + "]";
+				+ ", precioCompraPollo=" + precioCompraPollo + ", precioCompraHuevo=" + precioCompraHuevo
+				+ ", diasDeCompraPollo=" + diasDeCompraPollo + ", diasDeCompraHuevo=" + diasDeCompraHuevo + "]";
 	}
+
+
+
+
+
+
+
+
+
+	
 
 
 

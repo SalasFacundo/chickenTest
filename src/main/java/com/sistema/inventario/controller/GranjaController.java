@@ -125,7 +125,9 @@ public class GranjaController {
 		{
 			int telefono= Integer.parseInt(request.getParameter("telefono")),
 			capacidadPollos= Integer.parseInt(request.getParameter("capacidadPollos")),
-			capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos"));
+			capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos")),
+					diasCompraPollo= Integer.parseInt(request.getParameter("diasDeCompraPollo")),
+							diasCompraHuevo= Integer.parseInt(request.getParameter("diasDeCompraHuevo"));
 			
 			
 			String nombre= request.getParameter("nombre"),
@@ -138,7 +140,7 @@ public class GranjaController {
 					precioCompraHuevo=Double.parseDouble((request.getParameter("precioCompraHuevo")));
 					
 					
-			Granja granjaNueva=new Granja(nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo);
+			Granja granjaNueva=new Granja(nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo);
 			
 				
 			granjaRepository.deleteAll();
