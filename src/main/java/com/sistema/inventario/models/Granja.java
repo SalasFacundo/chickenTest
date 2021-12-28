@@ -20,6 +20,12 @@ public class Granja {
 	@Column(name="nombre", length=50, nullable=false)	
 	private String nombre;
 	
+	@Column(name="telefono", length=50, nullable=false)	
+	private int telefono;
+	
+	@Column(name="direccion", length=50, nullable=false)	
+	private String direccion;
+	
 	@Column(name="dinero", length=50, nullable=false)	
 	private double dinero;
 	
@@ -36,22 +42,25 @@ public class Granja {
 	private double precioVentaHuevo;
 	
 	
-	
-	
-	
-	public Granja(String nombre, double dinero, int capacidadHuevos, int capacidadPollos, double precioVentaPollo,
-			double precioVentaHuevo) {
+
+
+	public Granja(Long id, String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
+			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo) {
 		
+		this.id = id;
 		this.nombre = nombre;
+		this.telefono = telefono;
+		this.direccion = direccion;
 		this.dinero = dinero;
 		this.capacidadHuevos = capacidadHuevos;
 		this.capacidadPollos = capacidadPollos;
 		this.precioVentaPollo = precioVentaPollo;
 		this.precioVentaHuevo = precioVentaHuevo;
 	}
-	
-	
-	
+
+
+
+
 
 
 
@@ -153,6 +162,46 @@ public class Granja {
 		this.precioVentaHuevo = precioVentaHuevo;
 	}
 
+	
+
+
+
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+
+
+
+
+
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+
+
+
+
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+
+
+
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
 
 
 
@@ -160,10 +209,18 @@ public class Granja {
 
 	@Override
 	public String toString() {
-		return "Granja [id=" + id + ", nombre=" + nombre + ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos
-				+ ", capacidadPollos=" + capacidadPollos + ", precioVentaPollo=" + precioVentaPollo
-				+ ", precioVentaHuevo=" + precioVentaHuevo + "]";
+		return "Granja [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion
+				+ ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos + ", capacidadPollos=" + capacidadPollos
+				+ ", precioVentaPollo=" + precioVentaPollo + ", precioVentaHuevo=" + precioVentaHuevo + "]";
 	}
+
+
+
+
+
+
+
+	
 	
 	
 
