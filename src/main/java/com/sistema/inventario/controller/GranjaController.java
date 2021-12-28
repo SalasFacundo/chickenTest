@@ -132,16 +132,19 @@ public class GranjaController {
 					direccion= request.getParameter("direccion");
 			
 			double dinero=Double.parseDouble((request.getParameter("dinero"))), 
-					precioVentaPollo=Double.parseDouble((request.getParameter("precioVentaPollo"))), 
-					precioVentaHuevo=Double.parseDouble((request.getParameter("precioVentaHuevo")));
+					precioVentaPollo=Double.parseDouble((request.getParameter("precioVentaPollo"))),
+					precioVentaHuevo=Double.parseDouble((request.getParameter("precioVentaHuevo"))), 
+					precioCompraPollo=Double.parseDouble((request.getParameter("precioCompraPollo"))),
+					precioCompraHuevo=Double.parseDouble((request.getParameter("precioCompraHuevo")));
 					
-			Granja granjaNueva=new Granja(nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo);
+					
+			Granja granjaNueva=new Granja(nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo);
 			
 				
 			granjaRepository.deleteAll();
 			granjaRepository.save(granjaNueva);
 		
-
+		
 		}
 		
 		return "redirect:/granja";
