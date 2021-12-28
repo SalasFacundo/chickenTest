@@ -58,6 +58,27 @@ public class Granja {
 		this.precioVentaHuevo = precioVentaHuevo;
 	}
 
+	
+
+
+
+
+
+
+	public Granja(String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
+			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo) {
+		
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.dinero = dinero;
+		this.capacidadHuevos = capacidadHuevos;
+		this.capacidadPollos = capacidadPollos;
+		this.precioVentaPollo = precioVentaPollo;
+		this.precioVentaHuevo = precioVentaHuevo;
+	}
+
+
 
 
 

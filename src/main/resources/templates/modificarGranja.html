@@ -46,16 +46,16 @@
             <div class="container" style="border-radius: 0;border-top-left-radius: 100%;border-top-right-radius: 100%;border-bottom-right-radius: 100%;border-bottom-left-radius: 100%;">
                 <div class="block-heading">
                     <h2 class="text-info">Modificar datos de la granja</h2>
-                </div>
-                <form style="border-top-style: none;border-top-color: rgb(94, 164, 243);">
-                    <div class="mb-3"><label class="form-label" for="name">Nombre</label><input class="form-control" type="number"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Direccion</label><input class="form-control" type="text" id="subject" name="subject"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Telefono</label><input class="form-control" type="text" id="subject-1" name="subject"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Dinero</label><input class="form-control" type="number"></div>
-                    <div class="mb-3" style="border-radius: 0px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;border-bottom-left-radius: 0;border-top: 2px dashed rgba(191,217,244,0.49);padding-top: 10px;"><label class="form-label" for="subject">Valor de pollo</label><input class="form-control" type="number"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Capacidad de pollos</label><input class="form-control" type="number"></div>
-                    <div class="mb-3" style="border-top: 2px dashed rgba(191,217,244,0.49);padding-top: 10px;"><label class="form-label" for="subject">Valor de huevo</label><input class="form-control" type="number"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Capacidad de huevos</label><input class="form-control" type="number"></div>
+                </div>              
+                <form action="procesarModificarGranja" method="POST" style="border-top-style: none;border-top-color: rgb(94, 164, 243);">
+                    <div class="mb-3"><label class="form-label" for="name" >Nombre</label><input class="form-control" type="text" name="nombre" th:value="${granja.nombre}" th:placeholder="${granja.nombre}"></div>
+                    <div class="mb-3"><label class="form-label" for="subject">Direccion</label><input class="form-control" type="text" id="subject"  name="direccion" th:value="${granja.direccion}" th:placeholder="${granja.direccion}"></div>
+                    <div class="mb-3"><label class="form-label" for="subject">Telefono</label><input class="form-control" type="text" id="subject-1" name="telefono" th:value="${granja.telefono}" th:placeholder="${granja.telefono}"></div>
+                    <div class="mb-3"><label class="form-label" for="subject">Dinero</label><input class="form-control" type="number" th:value="${granja.dinero}" name="dinero" th:placeholder="${granja.dinero}"></div>
+                    <div class="mb-3" style="border-radius: 0px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;border-bottom-left-radius: 0;border-top: 2px dashed rgba(191,217,244,0.49);padding-top: 10px;"><label class="form-label" for="subject">Valor de pollo</label><input class="form-control" type="number" name="precioVentaPollo" th:value="${granja.precioVentaPollo}" th:placeholder="${granja.precioVentaPollo}"></div>
+                    <div class="mb-3"><label class="form-label" for="subject">Capacidad de pollos</label><input class="form-control" type="number" th:value="${granja.capacidadPollos}" name="capacidadPollos" th:placeholder="${granja.capacidadPollos}"></div>
+                    <div class="mb-3" style="border-top: 2px dashed rgba(191,217,244,0.49);padding-top: 10px;"><label class="form-label" for="subject">Valor de huevo</label><input class="form-control" type="number" name="precioVentaHuevo" th:value="${granja.precioVentaHuevo}" th:placeholder="${granja.precioVentaHuevo}"></div>
+                    <div class="mb-3"><label class="form-label" for="subject">Capacidad de huevos</label><input class="form-control" type="number" th:value="${granja.capacidadHuevos}" name="capacidadHuevos" th:placeholder="${granja.capacidadHuevos}"></div>
                     <div class="mb-3"></div>
                     <div class="mb-3"><button class="btn btn-primary" type="submit">Actualizar</button></div>
                 </form>
