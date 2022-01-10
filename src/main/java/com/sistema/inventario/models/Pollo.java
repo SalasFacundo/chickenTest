@@ -20,6 +20,15 @@ public class Pollo {
 	@Column(name="dias", length=4, nullable=false)	
 	private int dias;
 
+	
+	
+	
+
+
+	public Pollo() {
+		
+	}
+
 
 	public Pollo(Long id, int dias) {
 		this.id = id;
@@ -36,5 +45,24 @@ public class Pollo {
 		this.dias = dias;
 	}
 	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public int getDias() {
+		return dias;
+	}
+
+
+	public void setDias(int dias) {
+		this.dias = dias;
+	}
 	
 }

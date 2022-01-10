@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sistema.inventario.dao.IGranjaRepository;
 import com.sistema.inventario.dao.IHuevoRepository;
+import com.sistema.inventario.dao.IPolloRepository;
 import com.sistema.inventario.models.Granja;
 import com.sistema.inventario.models.Huevo;
+import com.sistema.inventario.models.Pollo;
 
 
 @Controller
@@ -32,6 +34,9 @@ public class GranjaController {
 	
 	@Autowired
 	private IHuevoRepository huevoRepository;
+	
+	@Autowired
+	private IPolloRepository polloRepository;
 
 	
 	@GetMapping(value = "/comprar")
@@ -89,6 +94,9 @@ public class GranjaController {
 	@GetMapping(value = "/verPollos")
 	public String verPollos(Model model)
 	{
+		List<Pollo> pollos=polloRepository.findAll();		
+		model.addAttribute("pollos", pollos);
+		
 		return "verPollos";
 	}
 	
