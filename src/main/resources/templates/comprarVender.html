@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="utf-8">
@@ -22,15 +23,15 @@
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="width: 100%;">
-                <div class="container"><a class="navbar-brand" th:href="@{/index}">Granja "Los pollos hermanos"</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container"><a class="navbar-brand" th:href="@{/index}" th:text="${granja.nombre}"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-2" style="padding-left: 0px;">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item" style="margin-right: 30%;"></li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Administrar granja</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/granja}">Ver detalles</a><a class="dropdown-item" th:href="@{/modificarGranja}">Modificar</a></div>
                             </li>
-                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Compra&nbsp; /&nbsp; venta</a>
-                                <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/comprar}">Comprar&nbsp;</a><a class="dropdown-item" th:href="@{/vender}">Vender&nbsp;</a></div>
+                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link"  th:href="@{/comprarVender}">Compra&nbsp; /&nbsp; venta</a>
+                                
                             </li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Stock</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/verPollos}">Ver pollos</a><a class="dropdown-item" th:href="@{/verHuevos}">Ver huevos</a></div>
@@ -45,19 +46,29 @@
         <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Comprar&nbsp;</h2>
+                    <h2 class="text-info">Comprar / Vender&nbsp;</h2>
                 </div>
-                <form>
-                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" min="0" required></div>
-                                  
-                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" required></div>
-                    <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select">
-                            <option value="&quot;pollo&quot;" selected="">Pollo</option>
-                            <option value="&quot;huevo&quot;">Huevo</option>
+                <form action="procesarVenta" method="POST">
+                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad" min="0" required></div>
+                    <div class="mb-3"></div>
+                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" name="dias" min="0" required></div>
+                    <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select" name="producto">
+                            <option value="pollo" selected="">Pollo</option>
+                            <option value="huevo">Huevo</option>
+                        </select></div>
+                    <div class="mb-3"><label class="form-label" for="email">Operacion</label><select class="form-select" name="operacion">
+                            <option value="comprar" selected="">Comprar</option>
+                            <option value="vender">Vender</option>
                         </select></div>
                     <div class="mb-3"></div>
-                    <div class="mb-3"><button class="btn btn-primary" type="submit">Comprar</button></div>
-                     <small th:text="'Valor de huevos: ' + ${granja.precioCompraHuevo} + '  |  '+ ' Valor de pollos: '+ ${granja.precioCompraPollo}"></small> 
+                    <div class="mb-3"><button class="btn btn-primary" type="submit">Confirmar</button></div>
+                    <small th:text="'Venta de huevos: ' + ${granja.precioVentaHuevo} + '  |  '+ ' Venta de pollos: '+ ${granja.precioVentaPollo}"></small> <br>
+                    <small th:text="'Compra de huevos: ' + ${granja.precioCompraHuevo} + '  |  '+ ' Compra de pollos: '+ ${granja.precioCompraPollo}"></small> <br>
+                    <small class="form-text text-danger" th:text="${errores}"></small>      
+                    
+                    
+                    
+                    
                 </form>
             </div>
         </section>
