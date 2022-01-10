@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistema.inventario.dao.IGranjaRepository;
+import com.sistema.inventario.dao.IHuevoRepository;
 import com.sistema.inventario.models.Granja;
+import com.sistema.inventario.models.Huevo;
 
 
 @Controller
@@ -27,6 +29,9 @@ public class GranjaController {
 	
 	@Autowired
 	private IGranjaRepository granjaRepository;
+	
+	@Autowired
+	private IHuevoRepository huevoRepository;
 
 	
 	@GetMapping(value = "/comprar")
@@ -74,6 +79,10 @@ public class GranjaController {
 	@GetMapping(value = "/verHuevos")
 	public String verHuevos(Model model)
 	{
+		
+		List<Huevo> huevos=huevoRepository.findAll();
+		
+		model.addAttribute("huevos", huevos);
 		return "verHuevos";
 	}	
 	
