@@ -1,6 +1,7 @@
 package com.sistema.inventario.controller;
 
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistema.inventario.dao.IGranjaRepository;
+
+import com.sistema.inventario.dao.IHuevoRepository;
+import com.sistema.inventario.dao.IPolloRepository;
 import com.sistema.inventario.models.Granja;
+import com.sistema.inventario.models.Huevo;
+import com.sistema.inventario.models.Pollo;
+
 
 
 @Controller
@@ -28,14 +35,22 @@ public class GranjaController {
 	private IGranjaRepository granjaRepository;
 
 	
+	@Autowired
+	private IHuevoRepository huevoRepository;
+	
+	@Autowired
+	private IPolloRepository polloRepository;
+
+
+	
 	@GetMapping(value = "/comprar")
 	public String comprar(Model model)
 	{		
-		Granja granja1= new Granja("Pollos Hermanos", 123456789, 20, 10, 500, 100 );
-		
-		//granjaRepository.save(granja1);
+
 		List<Granja> listaGranja= granjaRepository.findAll();
-		System.out.println(listaGranja);
+		Granja granja= listaGranja.get(0);
+
+	
 		
 		
 		return "comprar";
@@ -44,6 +59,10 @@ public class GranjaController {
 	@GetMapping(value = "/granja")
 	public String granja(Model model)
 	{
+
+		Granja granja= granjaRepository.findAll().get(0);
+		model.addAttribute("granja", granja);
+
 		return "granja";
 	}
 	
@@ -56,6 +75,10 @@ public class GranjaController {
 	@GetMapping(value = "/modificarGranja")
 	public String modificarGranja(Model model)
 	{
+
+		Granja granja= granjaRepository.findAll().get(0);
+		model.addAttribute("granja", granja);
+
 		return "modificarGranja";
 	}
 	
@@ -68,12 +91,23 @@ public class GranjaController {
 	@GetMapping(value = "/verHuevos")
 	public String verHuevos(Model model)
 	{
+
+		
+		List<Huevo> huevos=huevoRepository.findAll();
+		
+		model.addAttribute("huevos", huevos);
+
 		return "verHuevos";
 	}	
 	
 	@GetMapping(value = "/verPollos")
 	public String verPollos(Model model)
 	{
+
+		List<Pollo> pollos=polloRepository.findAll();		
+		model.addAttribute("pollos", pollos);
+		
+
 		return "verPollos";
 	}
 	
@@ -83,28 +117,66 @@ public class GranjaController {
 	@PostMapping(value="/procesarVenta")
 	public String procesarVenta(HttpServletRequest request, Model model)
 	{	
-		System.out.println("entra");
+
+		
+		Granja granja= granjaRepository.findAll().get(0);
+		
+		
+
 		String producto="";
 		if(request.getParameter("cantidad") != null && request.getParameter("dias") != null && request.getParameter("producto")!=null)
 		{
 			int cantidad= Integer.parseInt(request.getParameter("cantidad"));
 			int dias= Integer.parseInt(request.getParameter("dias"));
 			 producto= request.getParameter("producto");
-			
-			model.addAttribute("cantidad",cantidad);
-			model.addAttribute("dias",dias);
-			model.addAttribute("producto",producto);
-			
 		
-			System.out.println(cantidad);
-			System.out.println(dias);
-			System.out.println(producto);
 		}
 		
 		return "redirect:/vender";
 	
 	}
 	
+	
+
+	@PostMapping(value="/procesarModificarGranja")
+	public String procesarModificarGranja(HttpServletRequest request, Model model)
+	{	
+		
+		Granja granja= granjaRepository.findAll().get(0);
+		
+		
+		String producto="";
+		if(request.getParameter("telefono") != null && request.getParameter("capacidadPollos") != null && request.getParameter("capacidadHuevos")!=null && request.getParameter("nombre")!=null && request.getParameter("direccion")!=null && request.getParameter("dinero")!=null && request.getParameter("precioVentaHuevo")!=null && request.getParameter("precioVentaPollo")!=null)
+		{
+			int telefono= Integer.parseInt(request.getParameter("telefono")),
+			capacidadPollos= Integer.parseInt(request.getParameter("capacidadPollos")),
+			capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos")),
+					diasCompraPollo= Integer.parseInt(request.getParameter("diasDeCompraPollo")),
+							diasCompraHuevo= Integer.parseInt(request.getParameter("diasDeCompraHuevo"));
+			
+			
+			String nombre= request.getParameter("nombre"),
+					direccion= request.getParameter("direccion");
+			
+			double dinero=Double.parseDouble((request.getParameter("dinero"))), 
+					precioVentaPollo=Double.parseDouble((request.getParameter("precioVentaPollo"))),
+					precioVentaHuevo=Double.parseDouble((request.getParameter("precioVentaHuevo"))), 
+					precioCompraPollo=Double.parseDouble((request.getParameter("precioCompraPollo"))),
+					precioCompraHuevo=Double.parseDouble((request.getParameter("precioCompraHuevo")));
+					
+					
+			Granja granjaNueva=new Granja(nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo);
+			
+				
+			granjaRepository.deleteAll();
+			granjaRepository.save(granjaNueva);
+		
+		
+		}
+		
+		return "redirect:/granja";
+	
+	}
 	
 	
 

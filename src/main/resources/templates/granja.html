@@ -22,7 +22,9 @@
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="width: 100%;">
-                <div class="container"><a class="navbar-brand" th:href="@{/index}">Granja "Los pollos hermanos"</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+
+                <div class="container"><a class="navbar-brand" th:href="@{/index}" th:text="${granja.nombre}"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+
                     <div class="collapse navbar-collapse" id="navcol-2" style="padding-left: 0px;">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item" style="margin-right: 30%;"></li>
@@ -47,30 +49,40 @@
                 <div class="block-heading">
                     <h2 class="text-info" style="margin-bottom: 100px;">Detalles de granja</h2>
                 </div>
+
+                <br><br><br>
+
                 <div class="row justify-content-end">
                     <div class="col-md-5 feature-box" style="border-color: rgb(150,162,174);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-house-door icon">
                             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"></path>
                         </svg>
                         <h4>Granja</h4>
-                        <p>Nombre: "Los pollos hermanos<br></p>
-                        <p>Dinero: $12313</p>
-                        <p>Direccion: Lorem Ipsum</p>
-                        <p>Telefono: 2235988914</p>
+
+                        <p th:text="'Nombre: ' + ${granja.nombre} "><br></p>
+                        <p th:text="'Dinero: ' + ${granja.dinero} "></p>
+                        <p th:text="'Direccion: ' + ${granja.direccion} "></p>
+                        <p th:text="'Telefono: ' + ${granja.telefono} "></p>
+                        <p th:text="'Direccion: ' + ${granja.direccion} "></p>
+                        <p th:text="'Telefono: ' + ${granja.telefono} "></p>
                     </div>
-                    <div class="col-md-5 feature-box"><i class="icon-chart icon"></i>
-                        <h4>Ventas del mes</h4>
-                        <p>Pollos: 50/500</p>
-                        <p>Huevos: 100/500</p>
-                    </div>
+                   
                     <div class="col-md-5 feature-box"><i class="fas fa-kiwi-bird icon"></i>
                         <h4>Pollos</h4>
-                        <p>Capacidad: 50/100</p>
-                        <p>Precio de venta: $500</p>
+                        <p th:text="'Capacidad: ' + ${granja.capacidadPollos} "></p>
+                        <p th:text="'Precio de venta: ' + ${granja.precioVentaPollo} "></p>
+                        <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
+                        <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraPollo} "></p>
+                        <br><br><br>
                     </div>
+                    
                     <div class="col-md-5 feature-box"><i class="icon ion-egg icon"></i>
+                    
                         <h4>Huevos</h4>
-                        <p>Capacidad: 500/1000</p>
-                        <p>Precio de venta: $50</p>
+                        <p th:text="'Capacidad: ' + ${granja.capacidadHuevos} "></p>
+                        <p th:text="'Precio de venta: ' + ${granja.precioVentaHuevo} "></p>
+                        <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
+                        <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraHuevo} "></p>
+
                     </div>
                 </div>
             </div>

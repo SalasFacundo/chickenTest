@@ -20,6 +20,14 @@ public class Granja {
 	@Column(name="nombre", length=50, nullable=false)	
 	private String nombre;
 	
+
+	@Column(name="telefono", length=50, nullable=false)	
+	private int telefono;
+	
+	@Column(name="direccion", length=50, nullable=false)	
+	private String direccion;
+	
+
 	@Column(name="dinero", length=50, nullable=false)	
 	private double dinero;
 	
@@ -35,23 +43,100 @@ public class Granja {
 	@Column(name="precioVentaHuevo", length=50, nullable=false)	
 	private double precioVentaHuevo;
 	
+
+	@Column(name="precioCompraPollo", length=50, nullable=false)	
+	private double precioCompraPollo;
+	
+	@Column(name="precioCompraHuevo", length=50, nullable=false)	
+	private double precioCompraHuevo;
+	
+	@Column(name="diasDeCompraPollo", length=50, nullable=false)	
+	private int diasDeCompraPollo;
+	
+	@Column(name="diasDeCompraHuevo", length=50, nullable=false)	
+	private int diasDeCompraHuevo;
 	
 	
 	
+
+
 	
-	public Granja(String nombre, double dinero, int capacidadHuevos, int capacidadPollos, double precioVentaPollo,
-			double precioVentaHuevo) {
-		
+
+	
+
+
+
+
+
+
+	
+
+
+
+
+
+	public Granja(Long id, String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
+			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
+			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
+		this.telefono = telefono;
+		this.direccion = direccion;
+
 		this.dinero = dinero;
 		this.capacidadHuevos = capacidadHuevos;
 		this.capacidadPollos = capacidadPollos;
 		this.precioVentaPollo = precioVentaPollo;
 		this.precioVentaHuevo = precioVentaHuevo;
+
+		this.precioCompraPollo = precioCompraPollo;
+		this.precioCompraHuevo = precioCompraHuevo;
+		this.diasDeCompraPollo = diasDeCompraPollo;
+		this.diasDeCompraHuevo = diasDeCompraHuevo;
 	}
+
+
+
+
 	
+
 	
-	
+
+
+
+	public Granja(String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
+			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
+			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
+		super();
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.dinero = dinero;
+		this.capacidadHuevos = capacidadHuevos;
+		this.capacidadPollos = capacidadPollos;
+		this.precioVentaPollo = precioVentaPollo;
+		this.precioVentaHuevo = precioVentaHuevo;
+		this.precioCompraPollo = precioCompraPollo;
+		this.precioCompraHuevo = precioCompraHuevo;
+		this.diasDeCompraPollo = diasDeCompraPollo;
+		this.diasDeCompraHuevo = diasDeCompraHuevo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public Granja(Long id) {
+		
+		this.id = id;
+	}
+
 
 
 
@@ -154,16 +239,168 @@ public class Granja {
 	}
 
 
+	
+
+
+
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+
+
+
+
+
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
+
+
+
+
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+
+
+
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
+
+	
+
+
+
+	public double getPrecioCompraPollo() {
+		return precioCompraPollo;
+	}
+
+
+
+
+
+	public void setPrecioCompraPollo(double precioCompraPollo) {
+		this.precioCompraPollo = precioCompraPollo;
+	}
+
+
+
+
+
+	public double getPrecioCompraHuevo() {
+		return precioCompraHuevo;
+	}
+
+
+
+
+
+	public void setPrecioCompraHuevo(double precioCompraHuevo) {
+		this.precioCompraHuevo = precioCompraHuevo;
+	}
+
+
+	
+
+
+	public int getDiasDeCompraPollo() {
+		return diasDeCompraPollo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDiasDeCompraPollo(int diasDeCompraPollo) {
+		this.diasDeCompraPollo = diasDeCompraPollo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public int getDiasDeCompraHuevo() {
+		return diasDeCompraHuevo;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setDiasDeCompraHuevo(int diasDeCompraHuevo) {
+		this.diasDeCompraHuevo = diasDeCompraHuevo;
+	}
+
+
+
+
+
+
+
 
 
 
 
 	@Override
 	public String toString() {
-		return "Granja [id=" + id + ", nombre=" + nombre + ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos
-				+ ", capacidadPollos=" + capacidadPollos + ", precioVentaPollo=" + precioVentaPollo
-				+ ", precioVentaHuevo=" + precioVentaHuevo + "]";
+
+		return "Granja [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion
+				+ ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos + ", capacidadPollos=" + capacidadPollos
+				+ ", precioVentaPollo=" + precioVentaPollo + ", precioVentaHuevo=" + precioVentaHuevo
+				+ ", precioCompraPollo=" + precioCompraPollo + ", precioCompraHuevo=" + precioCompraHuevo
+				+ ", diasDeCompraPollo=" + diasDeCompraPollo + ", diasDeCompraHuevo=" + diasDeCompraHuevo + "]";
 	}
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+	
+
+
+
+
+
+	
+
 	
 	
 
