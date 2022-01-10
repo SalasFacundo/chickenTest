@@ -2,6 +2,7 @@ package com.sistema.inventario.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,14 +46,17 @@ public class GranjaController {
 	{		
 
 		
-		//granjaRepository.save(granja1);
-		List<Granja> listaGranja= granjaRepository.findAll();
-		Granja granja= listaGranja.get(0);
-		System.out.println(listaGranja);
+		
+		Granja granja= granjaRepository.findAll().get(0);
+		model.addAttribute("granja", granja);
 		
 		
 		return "comprar";
 	}
+	
+	
+	
+	
 	
 	@GetMapping(value = "/granja")
 	public String granja(Model model)
@@ -78,24 +83,68 @@ public class GranjaController {
 	@GetMapping(value = "/vender")
 	public String vender(Model model)
 	{
+		Granja granja= granjaRepository.findAll().get(0);
+		model.addAttribute("granja", granja);
 		return "vender";
+	}
+	
+	@PostMapping(value="/procesarVenta")
+	public String procesarVenta(HttpServletRequest request, Model model)
+	{	
+		List<String> errores= new ArrayList<>();
+		Granja granja= granjaRepository.findAll().get(0);
+		int cantidad=Integer.parseInt(request.getParameter("cantidad")), 
+			dias=Integer.parseInt(request.getParameter("dias"));	
+			String producto=request.getParameter("producto").replaceAll("\"", "");				
+		Map<String,String> map=mapHuevos();
+			
+			if(producto.equals("pollo"))			
+				map=mapPollos();
+			
+			if(map.get(String.valueOf(dias))==null)
+				errores.add("No se encuentran "+producto+"s de "+dias+" dias de vida");
+			else
+			{
+				
+				
+				
+				if(cantidad>Integer.valueOf(map.get(String.valueOf(dias))))
+				{
+					errores.add("Se encuentran solo "+map.get(String.valueOf(dias))+" unidades de "+dias+" dias");
+				}
+			}
+			
+			
+			model.addAttribute("granja",granja);
+			model.addAttribute("errores", errores);
+			System.out.println(map);
+			
+			System.out.println(cantidad);
+			System.out.println(dias);
+			System.out.println(producto);
+			
+				 
+				
+		
+		return "vender";
+	
 	}
 	
 	@GetMapping(value = "/verHuevos")
 	public String verHuevos(Model model)
 	{
+				
 		
-		List<Huevo> huevos=huevoRepository.findAll();
-		
-		model.addAttribute("huevos", huevos);
+		model.addAttribute("huevos", mapHuevos());
 		return "verHuevos";
 	}	
 	
 	@GetMapping(value = "/verPollos")
 	public String verPollos(Model model)
 	{
-		List<Pollo> pollos=polloRepository.findAll();		
-		model.addAttribute("pollos", pollos);
+		
+				 
+		model.addAttribute("pollos", mapPollos());
 		
 		return "verPollos";
 	}
@@ -103,31 +152,7 @@ public class GranjaController {
 	
 
 	
-	@PostMapping(value="/procesarVenta")
-	public String procesarVenta(HttpServletRequest request, Model model)
-	{	
-		List<String> errores= new ArrayList<>();
-		Granja granja= granjaRepository.findAll().get(0);
-		
-		
-		String producto="";
-		if(request.getParameter("cantidad") != null && request.getParameter("dias") != null && request.getParameter("producto")!=null)
-		{
-			int cantidad= Integer.parseInt(request.getParameter("cantidad"));
-			int dias= Integer.parseInt(request.getParameter("dias"));
-			 producto= request.getParameter("producto");
-			
-			
-			
-		
-			System.out.println(cantidad);
-			System.out.println(dias);
-			System.out.println(producto);
-		}
-		
-		return "redirect:/vender";
 	
-	}
 	
 	
 	@PostMapping(value="/procesarModificarGranja")
@@ -169,6 +194,35 @@ public class GranjaController {
 		return "redirect:/granja";
 	
 	}
+	
+	
+	
+	
+	
+	private Map<String, String> mapHuevos()
+	{
+		Map<String, String> huevosPorDia = new HashMap<String, String>();
+		
+		 for (String valor : huevoRepository.cantidadDias()) {
+			 
+			 huevosPorDia.put(String.valueOf(valor.charAt(0)), String.valueOf(valor.charAt(2)));
+		}		 
+		 
+		 return huevosPorDia;
+	}
+	
+	private Map<String, String> mapPollos()
+	{
+		Map<String, String> huevosPorDia = new HashMap<String, String>();
+		
+		 for (String valor : polloRepository.cantidadDias()) {
+			 
+			 huevosPorDia.put(String.valueOf(valor.charAt(0)), String.valueOf(valor.charAt(2)));
+		}		 
+		 
+		 return huevosPorDia;
+	}
+	
 	
 	
 }

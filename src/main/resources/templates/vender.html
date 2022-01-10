@@ -49,15 +49,20 @@
                     <h2 class="text-info">Vender&nbsp;</h2>
                 </div>
                 <form action="procesarVenta" method="POST">
-                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad"></div>
+                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad" min="0" required></div>
                     <div class="mb-3"></div>
-                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" name="dias"></div>
+                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" name="dias" required></div>
                     <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select" name="producto">
                             <option value="&quot;pollo&quot;" selected="">Pollo</option>
                             <option value="&quot;huevo&quot;">Huevo</option>
                         </select></div>
                     <div class="mb-3"></div>
-                    <div class="mb-3"><button class="btn btn-primary" type="submit">Confirmar</button></div><label class="form-label" style="margin-left: 0;margin-right: 10px;">Valor de huevos: $500</label><label class="form-label">Valor de pollos: $500</label>
+                    <div class="mb-3"><button class="btn btn-primary" type="submit">Confirmar</button></div>
+                    <small th:text="'Valor de huevos: ' + ${granja.precioVentaHuevo} + '  |  '+ ' Valor de pollos: '+ ${granja.precioVentaPollo}"></small> <br>
+                    <small class="form-text text-danger" th:if="${errores.size!=0}" th:text="${errores}"></small>      
+                    
+                    
+                    
                 </form>
             </div>
         </section>

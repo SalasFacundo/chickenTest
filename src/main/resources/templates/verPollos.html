@@ -52,7 +52,6 @@
         <thead>
             <tr>
                 <th>Dias de vida</th>
-                <th>Producto</th>
                 <th>Cantidad</th>
                 
             </tr>
@@ -60,9 +59,8 @@
         <tbody>           
            
             <tr th:each="pollo: ${pollos}">
-                <td th:text="${pollo.dias}">9</td>
-                <td>Pollo</td>
-                <td>1</td>           
+                <td th:text="${pollo.key}"></td>
+                <td th:text="${pollo.value}"></td>           
             </tr>
            
             

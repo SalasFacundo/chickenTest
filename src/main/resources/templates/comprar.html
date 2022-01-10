@@ -48,15 +48,16 @@
                     <h2 class="text-info">Comprar&nbsp;</h2>
                 </div>
                 <form>
-                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number"></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Precio</label><input class="form-control" type="text" id="subject" name="subject"></div>
-                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number"></div>
+                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" min="0" required></div>
+                                  
+                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" required></div>
                     <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select">
                             <option value="&quot;pollo&quot;" selected="">Pollo</option>
                             <option value="&quot;huevo&quot;">Huevo</option>
                         </select></div>
                     <div class="mb-3"></div>
                     <div class="mb-3"><button class="btn btn-primary" type="submit">Comprar</button></div>
+                     <small th:text="'Valor de huevos: ' + ${granja.precioCompraHuevo} + '  |  '+ ' Valor de pollos: '+ ${granja.precioCompraPollo}"></small> 
                 </form>
             </div>
         </section>

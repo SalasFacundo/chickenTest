@@ -52,17 +52,16 @@
         <thead>
             <tr >
                 <th>Dias de vida</th>
-                <th>Producto</th>
                 <th>Cantidad</th>
                 
             </tr>
         </thead>
         <tbody>           
            
+        
             <tr th:each="huevo: ${huevos}">
-                <td th:text="${huevo.dias}"></td>
-                <td>Huevo</td>
-                <td>1</td>           
+                <td th:text="${huevo.key}"></td>
+                <td th:text="${huevo.value}">1</td>           
             </tr>
             
             
