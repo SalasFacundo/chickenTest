@@ -48,6 +48,8 @@
                     <h2 class="text-info">Modificar datos de la granja</h2>
                 </div>              
                 <form action="procesarModificarGranja" method="POST" style="border-top-style: none;border-top-color: rgb(94, 164, 243);">
+                	
+                	 <small class="form-text text-danger" th:text="${errores}"></small>  <br><br>
                     <div class="mb-3"><label class="form-label" for="name" >Nombre</label><input class="form-control" type="text" name="nombre" th:value="${granja.nombre}" th:placeholder="${granja.nombre}"></div>
                     <div class="mb-3"><label class="form-label" for="subject">Direccion</label><input class="form-control" type="text" id="subject"  name="direccion" th:value="${granja.direccion}" th:placeholder="${granja.direccion}"></div>
                     <div class="mb-3"><label class="form-label" for="subject">Telefono</label><input class="form-control" type="number" id="subject-1" name="telefono" th:value="${granja.telefono}" th:placeholder="${granja.telefono}"></div>
@@ -70,6 +72,7 @@
                     
                     
                     <div class="mb-3"><button class="btn btn-primary" type="submit">Actualizar</button></div>
+                    <small class="form-text text-danger" th:text="${errores}"></small>  
                 </form>
             </div>
         </section>
