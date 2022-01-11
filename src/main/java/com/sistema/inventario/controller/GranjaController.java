@@ -95,7 +95,7 @@ public class GranjaController {
 			else
 			{				
 				if(cantidad>Integer.valueOf(map.get(String.valueOf(dias))))				
-					errores.add("Se encuentran solo "+map.get(String.valueOf(dias))+" unidades de "+dias+" dias");				
+					errores.add("Se encuentran solo "+map.get(String.valueOf(dias))+" "+ producto+ " de "+dias+" dias");				
 			}
 			
 			
