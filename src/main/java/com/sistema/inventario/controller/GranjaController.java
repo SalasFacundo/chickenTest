@@ -51,7 +51,7 @@ public class GranjaController {
 		return "granja";
 	}
 	
-	@GetMapping(value = "/index")
+	@GetMapping({"/index","/","", "/home"})
 	public String index(Model model)
 	{
 		Granja granja= granjaRepository.findAll().get(0);
@@ -146,8 +146,9 @@ public class GranjaController {
 		String producto="";
 		if(request.getParameter("telefono") != null && request.getParameter("capacidadPollos") != null && request.getParameter("capacidadHuevos")!=null && request.getParameter("nombre")!=null && request.getParameter("direccion")!=null && request.getParameter("dinero")!=null && request.getParameter("precioVentaHuevo")!=null && request.getParameter("precioVentaPollo")!=null)
 		{
-			int telefono= Integer.parseInt(request.getParameter("telefono")),
-			capacidadPollos= Integer.parseInt(request.getParameter("capacidadPollos")),
+			long telefono= Long.parseLong(request.getParameter("telefono"));
+			
+			int capacidadPollos= Integer.parseInt(request.getParameter("capacidadPollos")),
 			capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos")),
 					diasCompraPollo= Integer.parseInt(request.getParameter("diasDeCompraPollo")),
 							diasCompraHuevo= Integer.parseInt(request.getParameter("diasDeCompraHuevo"));
