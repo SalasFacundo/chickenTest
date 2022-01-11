@@ -54,27 +54,35 @@
                         </svg>
                         <h4>Granja</h4>
                         <p th:text="'Nombre: ' + ${granja.nombre} "><br></p>
-                        <p th:text="'Dinero: ' + ${granja.dinero} "></p>
                         <p th:text="'Direccion: ' + ${granja.direccion} "></p>
                         <p th:text="'Telefono: ' + ${granja.telefono} "></p>
+                        <p th:text="'Dinero: ' + ${granja.dinero} "></p>                       
+                        
                         
                     </div>
                    
                     <div class="col-md-5 feature-box"><i class="fas fa-kiwi-bird icon"></i>
                         <h4>Pollos</h4>
-                        <p th:text="'Capacidad: ' + ${granja.capacidadPollos} "></p>
+                        <p th:text="'Capacidad: ' + ${cantidadPollos}+ '/' + ${granja.capacidadPollos} "></p>
                         <p th:text="'Precio de venta: ' + ${granja.precioVentaPollo} "></p>
                         <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
                         <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraPollo} "></p>
                         <br><br><br>
                     </div>
                     
+                    <div class="col-md-5 feature-box">
+                         <a href="#" class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Avanzar un dia</a>
+                        <br><br><br>
+                    </div>
+                   
+                   
+                    
                     <div class="col-md-5 feature-box"><i class="icon ion-egg icon"></i>
                     
                         <h4>Huevos</h4>
-                        <p th:text="'Capacidad: ' + ${granja.capacidadHuevos} "></p>
+                        <p th:text="'Capacidad: ' + ${cantidadHuevos}+ '/' + ${granja.capacidadHuevos} "></p>
                         <p th:text="'Precio de venta: ' + ${granja.precioVentaHuevo} "></p>
-                        <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
+                        <p th:text="'Precio de compra: ' + ${granja.precioCompraHuevo} "></p>
                         <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraHuevo} "></p>
                     </div>
                 </div>

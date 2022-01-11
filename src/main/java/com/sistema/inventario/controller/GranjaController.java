@@ -47,6 +47,12 @@ public class GranjaController {
 	public String granja(Model model)
 	{
 		Granja granja= granjaRepository.findAll().get(0);
+		
+		int cantidadPollos=polloRepository.findAll().size(),
+			cantidadHuevos= huevoRepository.findAll().size();
+		
+		model.addAttribute("cantidadPollos", cantidadPollos);
+		model.addAttribute("cantidadHuevos", cantidadHuevos);
 		model.addAttribute("granja", granja);
 		return "granja";
 	}
