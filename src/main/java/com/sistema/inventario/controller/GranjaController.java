@@ -99,12 +99,13 @@ public class GranjaController {
 					precioVentaHuevo=Double.parseDouble((request.getParameter("precioVentaHuevo"))), 
 					precioCompraPollo=Double.parseDouble((request.getParameter("precioCompraPollo"))),
 					precioCompraHuevo=Double.parseDouble((request.getParameter("precioCompraHuevo")));
-					
-					
-			Granja granjaNueva=new Granja(nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo);
 			
-				
-			granjaRepository.deleteAll();
+						
+					
+			Granja granjaNueva=new Granja(granja.getId(), nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo);
+			
+			
+			
 			granjaRepository.save(granjaNueva);
 		} catch (Exception e) {
 			model.addAttribute("errores", "Ingrese valores validos");
@@ -118,15 +119,17 @@ public class GranjaController {
 	
 	}
 	
-	@GetMapping(value = "/comprarVender")
+	@GetMapping(value = "/vender")
 	public String vender(Model model)
 	{
 		Granja granja= granjaRepository.findAll().get(0);
 		model.addAttribute("granja", granja);
-		return "comprarVender";
+		return "vender";
 	}
 	
-	@PostMapping(value="/procesarCompraVenta")
+	
+	
+	@PostMapping(value="/procesarVenta")
 	public String procesarVenta(HttpServletRequest request, Model model)
 	{	
 		List<String> errores= new ArrayList<>();
@@ -134,12 +137,15 @@ public class GranjaController {
 		int cantidad=Integer.parseInt(request.getParameter("cantidad")), 
 			dias=Integer.parseInt(request.getParameter("dias"));	
 			String producto=request.getParameter("producto"),
-				   operacion=request.getParameter("operacion");				
+				   operacion=request.getParameter("operacion");
+		int i=0;
+		
 		Map<String,String> map=mapHuevos();
 			
 		
 			if(producto.equals("pollo"))			
 				map=mapPollos();
+			
 			
 			if(map.get(String.valueOf(dias))==null)
 				errores.add("No se encuentran "+producto+"s de "+dias+" dias de vida");
@@ -155,9 +161,115 @@ public class GranjaController {
 			
 			
 			if(errores.isEmpty())
-				return "redirect:/comprarVender";
+			{
+				if(producto.equals("huevo"))
+				{
+					for (Huevo huevo : huevoRepository.findAll()) {
+						
+						if(huevo.getDias()==dias && i<cantidad)
+						{
+							huevoRepository.delete(huevo);
+							i++;
+						}
+					}	
+				
+					granja.setDinero(granja.getDinero()+granja.getPrecioVentaHuevo()*cantidad);
+				}
+				else
+				{
+					for (Pollo pollo : polloRepository.findAll()) {
+						
+						if(pollo.getDias()==dias && i<cantidad)
+						{
+							polloRepository.delete(pollo);
+							i++;
+						}
+					}	
+				
+					granja.setDinero(granja.getDinero()+granja.getPrecioVentaHuevo()*cantidad);
+				}
+				
+				
+				granjaRepository.save(granja);
+				
+				return "redirect:/vender";
+			}
+				
 			
-			return "comprarVender";
+			return "vender";
+	
+	}
+	
+	
+	@GetMapping(value = "/comprar")
+	public String comprar(Model model)
+	{
+		Granja granja= granjaRepository.findAll().get(0);
+		model.addAttribute("granja", granja);
+		return "comprar";
+	}
+	
+	
+	@PostMapping(value="/procesarCompra")
+	public String procesarCompra(HttpServletRequest request, Model model)
+	{	
+		List<String> errores= new ArrayList<>();
+		Granja granja= granjaRepository.findAll().get(0);
+		int cantidad=Integer.parseInt(request.getParameter("cantidad")); 			
+			String producto=request.getParameter("producto");
+		int i=0;
+		
+		Map<String,String> map=null;
+			
+		
+			if(producto.equals("pollo"))
+			{
+				map=mapPollos();
+				
+				if(cantidad * granja.getPrecioCompraPollo() > granja.getDinero())				
+					errores.add("No dispone del dinero suficiente, puede comprar solo " +  granja.getDinero()/granja.getPrecioCompraPollo());
+			}
+			else
+			{
+				map=mapHuevos();
+				
+				if(cantidad * granja.getPrecioCompraHuevo() > granja.getDinero())				
+					errores.add("No dispone del dinero suficiente, puede comprar solo " +  granja.getDinero()/granja.getPrecioCompraHuevo());
+				
+			}
+			
+			
+			model.addAttribute("granja",granja);
+			model.addAttribute("errores", errores);
+			
+			if(errores.isEmpty())
+			{
+				if(producto.equals("pollo"))
+				{
+					for(i=0; i<cantidad; i++)					
+						polloRepository.save(new Pollo(granja.getDiasDeCompraPollo()));
+					
+					
+					granja.setDinero(granja.getDinero()-granja.getPrecioCompraPollo()*cantidad);
+					
+				}
+				else
+				{
+					for(i=0; i<cantidad; i++)					
+						huevoRepository.save(new Huevo(granja.getDiasDeCompraPollo()));
+					
+					
+					granja.setDinero(granja.getDinero()-granja.getPrecioCompraHuevo()*cantidad);
+					
+				}
+				
+				granjaRepository.save(granja);
+				return "redirect:/comprar";
+			
+			}
+				
+			
+			return "comprar";
 	
 	}
 	
@@ -192,7 +304,8 @@ public class GranjaController {
 		
 		 for (String valor : huevoRepository.cantidadDias()) {
 			 
-			 huevosPorDia.put(String.valueOf(valor.charAt(0)), String.valueOf(valor.charAt(2)));
+			 String[] parts = valor.split(",");
+			 huevosPorDia.put(parts[0], parts[1]);
 		}		 
 		 
 		 return huevosPorDia;
@@ -200,14 +313,15 @@ public class GranjaController {
 	
 	private Map<String, String> mapPollos()
 	{
-		Map<String, String> huevosPorDia = new HashMap<String, String>();
+		Map<String, String> pollosPorDia = new HashMap<String, String>();
 		
 		 for (String valor : polloRepository.cantidadDias()) {
 			 
-			 huevosPorDia.put(String.valueOf(valor.charAt(0)), String.valueOf(valor.charAt(2)));
-		}		 
+			 String[] parts = valor.split(",");
+			 pollosPorDia.put(parts[0], parts[1]);
+		}		
 		 
-		 return huevosPorDia;
+		 return pollosPorDia;
 	}
 	
 	
