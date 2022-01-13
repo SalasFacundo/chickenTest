@@ -315,9 +315,26 @@ public class GranjaController {
 				polloRepository.save(pollo);
 			}
 			if(pollo.getDias()%polloPoneHuevo==0)
-				huevoRepository.save(new Huevo(0));			
+				huevoRepository.save(new Huevo(0));	
+		}
+		
+		
+		for (Huevo huevo : huevos) {		
 			
 			
+			if(huevo.getDias()>=huevoPonePollo)
+			{
+				polloRepository.save(new Pollo(0));
+				huevoRepository.delete(huevo);
+			}
+			
+			else
+			{
+				huevo.setDias(huevo.getDias()+1);
+				huevoRepository.save(huevo);
+			}
+			
+				
 		}
 	
 		
