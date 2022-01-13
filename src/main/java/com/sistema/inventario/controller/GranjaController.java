@@ -53,6 +53,7 @@ public class GranjaController {
 		
 		model.addAttribute("cantidadPollos", cantidadPollos);
 		model.addAttribute("cantidadHuevos", cantidadHuevos);
+		
 		model.addAttribute("granja", granja);
 		return "granja";
 	}
@@ -294,7 +295,21 @@ public class GranjaController {
 	}
 	
 	
-
+	@GetMapping(value = "/pasarDia")
+	public String pasarDia(Model model)
+	{
+				
+		model.addAttribute("granja", granjaRepository.findAll().get(0));		 
+		
+		System.out.println("ESTOY PASANDO UN DIA");
+		System.out.println("ESTOY PASANDO UN DIA");
+		System.out.println("ESTOY PASANDO UN DIA");
+		System.out.println("ESTOY PASANDO UN DIA");
+		System.out.println("ESTOY PASANDO UN DIA");
+		
+		
+		return "redirect:/granja";
+	}
 	
 	
 	
