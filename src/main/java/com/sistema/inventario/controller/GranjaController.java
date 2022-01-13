@@ -298,16 +298,30 @@ public class GranjaController {
 	@GetMapping(value = "/pasarDia")
 	public String pasarDia(Model model)
 	{
-				
-		model.addAttribute("granja", granjaRepository.findAll().get(0));		 
+		List<Huevo> huevos= huevoRepository.findAll();
+		List<Pollo> pollos= polloRepository.findAll();
+				 
+		int polloMuere=5, polloPoneHuevo=1, huevoPonePollo=2;
 		
-		System.out.println("ESTOY PASANDO UN DIA");
-		System.out.println("ESTOY PASANDO UN DIA");
-		System.out.println("ESTOY PASANDO UN DIA");
-		System.out.println("ESTOY PASANDO UN DIA");
-		System.out.println("ESTOY PASANDO UN DIA");
+		for (Pollo pollo : pollos) {
+			
+			
+			
+			if(pollo.getDias()>=polloMuere)
+				polloRepository.delete(pollo);
+			else
+			{
+				pollo.setDias(pollo.getDias()+1);
+				polloRepository.save(pollo);
+			}
+			if(pollo.getDias()%polloPoneHuevo==0)
+				huevoRepository.save(new Huevo(0));			
+			
+			
+		}
+	
 		
-		
+		model.addAttribute("granja", granjaRepository.findAll().get(0));
 		return "redirect:/granja";
 	}
 	
