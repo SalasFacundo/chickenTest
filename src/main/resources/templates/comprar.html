@@ -29,8 +29,10 @@
                             <li class="nav-item" style="margin-right: 30%;"></li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Administrar granja</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/granja}">Ver detalles</a><a class="dropdown-item" th:href="@{/modificarGranja}">Modificar</a></div>
+                            </li>                           
+                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Comprar / Vender</a>
+                                <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/comprar}">Comprar</a><a class="dropdown-item" th:href="@{/vender}">Vender</a></div>
                             </li>
-                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link"  th:href="@{/comprarVender}">Compra&nbsp; /&nbsp; venta</a>
                                 
                             </li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Stock</a>
@@ -46,23 +48,18 @@
         <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Comprar / Vender&nbsp;</h2>
+                    <h2 class="text-info">Comprar</h2>
                 </div>
-                <form action="procesarCompraVenta" method="POST">
+                <form action="procesarCompra" method="POST">
                     <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad" min="0" required></div>
                     <div class="mb-3"></div>
-                    <div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" name="dias" min="0" required></div>
                     <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select" name="producto">
                             <option value="pollo" selected="">Pollo</option>
                             <option value="huevo">Huevo</option>
                         </select></div>
-                    <div class="mb-3"><label class="form-label" for="email">Operacion</label><select class="form-select" name="operacion">
-                            <option value="comprar" selected="">Comprar</option>
-                            <option value="vender">Vender</option>
-                        </select></div>
+                    
                     <div class="mb-3"></div>
-                    <div class="mb-3"><button class="btn btn-primary" type="submit">Confirmar</button></div>
-                    <small th:text="'Venta de huevos: ' + ${granja.precioVentaHuevo} + '  |  '+ ' Venta de pollos: '+ ${granja.precioVentaPollo}"></small> <br>
+                    <div class="mb-3"><button class="btn btn-primary" type="submit">Comprar</button></div>
                     <small th:text="'Compra de huevos: ' + ${granja.precioCompraHuevo} + '  |  '+ ' Compra de pollos: '+ ${granja.precioCompraPollo}"></small> <br>
                     <small class="form-text text-danger" th:text="${errores}"></small>      
                     

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Features - Brand</title>
+    <title>Contact Us - Brand</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -19,7 +20,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+   <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="width: 100%;">
                 <div class="container"><a class="navbar-brand" th:href="@{/index}" th:text="${granja.nombre}"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -43,51 +44,30 @@
             </nav>
         </div>
     </nav>
-    <main class="page">
-        <section class="clean-block features">
+    <main class="page contact-us-page">
+        <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info" style="margin-bottom: 100px;">Detalles de granja</h2>
+                    <h2 class="text-info">Vender&nbsp;</h2>
                 </div>
-                <br><br><br>
-                <div class="row justify-content-end">
-                    <div class="col-md-5 feature-box" style="border-color: rgb(150,162,174);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-house-door icon">
-                            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"></path>
-                        </svg>
-                        <h4>Granja</h4>
-                        <p th:text="'Nombre: ' + ${granja.nombre} "><br></p>
-                        <p th:text="'Direccion: ' + ${granja.direccion} "></p>
-                        <p th:text="'Telefono: ' + ${granja.telefono} "></p>
-                        <p th:text="'Dinero: ' + ${granja.dinero} "></p>                       
-                        
-                        
-                    </div>
+                <form action="procesarVenta" method="POST">
+                	<div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" name="dias" min="0" required></div>
+                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad" min="0" required></div>
+                    <div class="mb-3"></div>                    
+                    <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select" name="producto">
+                            <option value="pollo" selected="">Pollo</option>
+                            <option value="huevo">Huevo</option>
+                        </select></div>
                    
-                    <div class="col-md-5 feature-box"><i class="fas fa-kiwi-bird icon"></i>
-                        <h4>Pollos</h4>
-                        <p th:text="'Capacidad: ' + ${cantidadPollos}+ '/' + ${granja.capacidadPollos} "></p>
-                        <p th:text="'Precio de venta: ' + ${granja.precioVentaPollo} "></p>
-                        <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
-                        <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraPollo} "></p>
-                        <br><br><br>
-                    </div>
+                    <div class="mb-3"></div>
+                    <div class="mb-3"><button class="btn btn-primary" type="submit">Vender</button></div>
+                    <small th:text="'Venta de huevos: ' + ${granja.precioVentaHuevo} + '  |  '+ ' Venta de pollos: '+ ${granja.precioVentaPollo}"></small> <br>
+                    <small class="form-text text-danger" th:text="${errores}"></small>      
                     
-                    <div class="col-md-5 feature-box">
-                         <a href="#" class="btn btn-primary btn-lg " role="button" >Avanzar un dia</a>
-                        <br><br><br>
-                    </div>
-                   
-                   
                     
-                    <div class="col-md-5 feature-box"><i class="icon ion-egg icon"></i>
                     
-                        <h4>Huevos</h4>
-                        <p th:text="'Capacidad: ' + ${cantidadHuevos}+ '/' + ${granja.capacidadHuevos} "></p>
-                        <p th:text="'Precio de venta: ' + ${granja.precioVentaHuevo} "></p>
-                        <p th:text="'Precio de compra: ' + ${granja.precioCompraHuevo} "></p>
-                        <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraHuevo} "></p>
-                    </div>
-                </div>
+                    
+                </form>
             </div>
         </section>
     </main>
