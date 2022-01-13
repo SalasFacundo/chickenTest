@@ -18,19 +18,21 @@
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
 </head>
 
-<body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+<body style="background: rgb(246,246,246);">
+   <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="width: 100%;">
-                <div class="container"><a class="navbar-brand" th:href="@{/index}">Granja "Los pollos hermanos"</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="container"><a class="navbar-brand" th:href="@{/index}" th:text="${granja.nombre}"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-2" style="padding-left: 0px;">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item" style="margin-right: 30%;"></li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Administrar granja</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/granja}">Ver detalles</a><a class="dropdown-item" th:href="@{/modificarGranja}">Modificar</a></div>
+                            </li>                           
+                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Comprar / Vender</a>
+                                <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/comprar}">Comprar</a><a class="dropdown-item" th:href="@{/vender}">Vender</a></div>
                             </li>
-                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Compra&nbsp; /&nbsp; venta</a>
-                                <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/comprar}">Comprar&nbsp;</a><a class="dropdown-item" th:href="@{/vender}">Vender&nbsp;</a></div>
+                                
                             </li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Stock</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/verPollos}">Ver pollos</a><a class="dropdown-item" th:href="@{/verHuevos}">Ver huevos</a></div>
@@ -52,7 +54,6 @@
         <thead>
             <tr>
                 <th>Dias de vida</th>
-                <th>Producto</th>
                 <th>Cantidad</th>
                 
             </tr>
@@ -61,9 +62,8 @@
            
 
             <tr th:each="pollo: ${pollos}">
-                <td th:text="${pollo.dias}">9</td>
-                <td>Pollo</td>
-                <td>1</td>           
+                <td th:text="${pollo.key}"></td>
+                <td th:text="${pollo.value}"></td>           
             </tr>
            
 
@@ -73,47 +73,7 @@
             </div>
         </section>
     </main>
-    <footer class="page-footer dark" style="margin-bottom: 0px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Downloads</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="#">Company Information</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Support</h5>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help desk</a></li>
-                        <li><a href="#">Forums</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Legal</h5>
-                    <ul>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright" style="height: 100%;">
-            <p>© 2021 Copyright Text</p>
-        </div>
-    </footer>
+
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>

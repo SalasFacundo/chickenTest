@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
 </head>
 
-<body>
+<body style="background: rgb(246,246,246);">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="width: 100%;">
@@ -30,9 +30,11 @@
                             <li class="nav-item" style="margin-right: 30%;"></li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Administrar granja</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/granja}">Ver detalles</a><a class="dropdown-item" th:href="@{/modificarGranja}">Modificar</a></div>
+                            </li>                           
+                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Comprar / Vender</a>
+                                <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/comprar}">Comprar</a><a class="dropdown-item" th:href="@{/vender}">Vender</a></div>
                             </li>
-                            <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Compra&nbsp; /&nbsp; venta</a>
-                                <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/comprar}">Comprar&nbsp;</a><a class="dropdown-item" th:href="@{/vender}">Vender&nbsp;</a></div>
+                                
                             </li>
                             <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Stock</a>
                                 <div class="dropdown-menu"><a class="dropdown-item" th:href="@{/verPollos}">Ver pollos</a><a class="dropdown-item" th:href="@{/verHuevos}">Ver huevos</a></div>
@@ -59,28 +61,35 @@
                         <h4>Granja</h4>
 
                         <p th:text="'Nombre: ' + ${granja.nombre} "><br></p>
-                        <p th:text="'Dinero: ' + ${granja.dinero} "></p>
                         <p th:text="'Direccion: ' + ${granja.direccion} "></p>
                         <p th:text="'Telefono: ' + ${granja.telefono} "></p>
-                        <p th:text="'Direccion: ' + ${granja.direccion} "></p>
-                        <p th:text="'Telefono: ' + ${granja.telefono} "></p>
+                        <p th:text="'Dinero: ' + ${granja.dinero} "></p>                       
+                        
+                        
                     </div>
                    
                     <div class="col-md-5 feature-box"><i class="fas fa-kiwi-bird icon"></i>
                         <h4>Pollos</h4>
-                        <p th:text="'Capacidad: ' + ${granja.capacidadPollos} "></p>
+                        <p th:text="'Capacidad: ' + ${cantidadPollos}+ '/' + ${granja.capacidadPollos} "></p>
                         <p th:text="'Precio de venta: ' + ${granja.precioVentaPollo} "></p>
                         <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
                         <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraPollo} "></p>
                         <br><br><br>
                     </div>
                     
+                    <div class="col-md-5 feature-box">
+                         <a th:href="@{/pasarDia}" class="btn btn-primary btn-lg " role="button">Avanzar un dia</a>
+                        <br><br><br>
+                    </div>
+                   
+                   
+                    
                     <div class="col-md-5 feature-box"><i class="icon ion-egg icon"></i>
                     
                         <h4>Huevos</h4>
-                        <p th:text="'Capacidad: ' + ${granja.capacidadHuevos} "></p>
+                        <p th:text="'Capacidad: ' + ${cantidadHuevos}+ '/' + ${granja.capacidadHuevos} "></p>
                         <p th:text="'Precio de venta: ' + ${granja.precioVentaHuevo} "></p>
-                        <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
+                        <p th:text="'Precio de compra: ' + ${granja.precioCompraHuevo} "></p>
                         <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraHuevo} "></p>
 
                     </div>
@@ -88,47 +97,7 @@
             </div>
         </section>
     </main>
-    <footer class="page-footer dark" style="margin-bottom: 0px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Downloads</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="#">Company Information</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Support</h5>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help desk</a></li>
-                        <li><a href="#">Forums</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Legal</h5>
-                    <ul>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright" style="height: 100%;">
-            <p>© 2021 Copyright Text</p>
-        </div>
-    </footer>
+    
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>

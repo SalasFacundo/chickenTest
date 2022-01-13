@@ -22,7 +22,7 @@ public class Granja {
 	
 
 	@Column(name="telefono", length=50, nullable=false)	
-	private int telefono;
+	private long telefono;
 	
 	@Column(name="direccion", length=50, nullable=false)	
 	private String direccion;
@@ -75,7 +75,7 @@ public class Granja {
 
 
 
-	public Granja(Long id, String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
+	public Granja(Long id, String nombre, long telefono, String direccion, double dinero, int capacidadHuevos,
 			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
 			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
 		super();
@@ -105,7 +105,7 @@ public class Granja {
 
 
 
-	public Granja(String nombre, int telefono, String direccion, double dinero, int capacidadHuevos,
+	public Granja(String nombre, long telefono, String direccion, double dinero, int capacidadHuevos,
 			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
 			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
 		super();
@@ -244,7 +244,7 @@ public class Granja {
 
 
 
-	public int getTelefono() {
+	public long getTelefono() {
 		return telefono;
 	}
 
@@ -254,7 +254,7 @@ public class Granja {
 
 
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(long telefono) {
 		this.telefono = telefono;
 	}
 

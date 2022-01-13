@@ -39,6 +39,16 @@ public class Huevo {
 		
 		
 	}
+	
+	
+
+
+
+
+	public Huevo(int dias) {
+		
+		this.dias = dias;
+	}
 
 
 
@@ -67,6 +77,16 @@ public class Huevo {
 	public void setDias(int dias) {
 		this.dias = dias;
 	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Huevo [id=" + id + ", dias=" + dias + "]";
+	}
+	
+	
 	
 	
 	
