@@ -1,0 +1,51 @@
+
+#containerForm
+{
+	display:flex;
+}
+
+#izquierda
+{	
+	width:32%;
+	flex-direction: row;
+	margin-right: 10px;
+}
+
+#centro
+{	
+	width:32%;
+	flex-direction: row;
+	margin-right: 10px;
+}
+
+#derecha
+{	
+	width:32%;
+	flex-direction: row;
+	margin-right: 10px;
+}
+
+input[type=number], [type=text]
+{
+
+	width:70%;
+	
+}
+#containerBoton
+{
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+	
+	
+}
+
+#boton{
+	display:flex;
+	justify-content: center;
+    align-items: center;
+	
+	
+	
+	
+}

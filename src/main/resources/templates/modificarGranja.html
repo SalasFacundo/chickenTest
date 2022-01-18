@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+    <link rel="stylesheet" href="assets/css/tablaModificarGranja.css">
+    
 </head>
 
 <body style="background: rgb(246,246,246);">
@@ -46,38 +48,68 @@
     </nav>
     <main class="page contact-us-page">
         <section class="clean-block clean-form dark">
-            <div class="container" style="border-radius: 0;border-top-left-radius: 100%;border-top-right-radius: 100%;border-bottom-right-radius: 100%;border-bottom-left-radius: 100%;">
+            <div class="container" style="border-radius: 0;border-top-left-radius: 100%;border-top-right-radius: 100%;border-bottom-right-radius: 100%;border-bottom-left-radius: 100%;width: 9000px;">
                 <div class="block-heading">
                     <h2 class="text-info">Modificar datos de la granja</h2>
                 </div>              
                 <form action="procesarModificarGranja" method="POST" style="border-top-style: none;border-top-color: rgb(94, 164, 243);">
                 	
                 	 <small class="form-text text-danger" th:text="${errores}"></small>  <br>
-                    <div class="mb-3"><label class="form-label" for="name" >Nombre</label><input class="form-control" type="text" name="nombre" th:value="${granja.nombre}" th:placeholder="${granja.nombre}" required></div>
+                	 
+                	 <div id="containerForm">
+                	 
+                	 
+                	 <div id="izquierda">
+                	 	
+                	 	<h3 class="text-info">Granja</h3><br>
+                	 	
+                	 	 <div class="mb-3"><label class="form-label" for="name" >Nombre</label><input class="form-control" type="text" name="nombre" th:value="${granja.nombre}" th:placeholder="${granja.nombre}" required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Direccion</label><input class="form-control" type="text" id="subject"  name="direccion" th:value="${granja.direccion}" th:placeholder="${granja.direccion}" required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Telefono</label><input class="form-control" type="number" id="subject-1" name="telefono" th:value="${granja.telefono}" th:placeholder="${granja.telefono}" required> </div>
                     <div class="mb-3"><label class="form-label" for="subject">Dinero</label><input class="form-control" type="number" step="0.01" th:value="${granja.dinero}" name="dinero" th:placeholder="${granja.dinero}" min=0 max=9999999.99 required> </div>
-                    
-                    <div class="mb-3" style="border-radius: 0px;border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;border-bottom-left-radius: 0;border-top: 2px dashed rgba(191,217,244,0.49);padding-top: 10px;">
-                    <label class="form-label" for="subject">Precio de venta de pollo</label><input class="form-control" type="number" step="0.01" name="precioVentaPollo" th:value="${granja.precioVentaPollo}" th:placeholder="${granja.precioVentaPollo}" min=0 max=9999999.99 required></div>
+                	 </div>
+                	 
+                	 <div id="centro">
+                	 
+                		<h3 class="text-info">Pollo</h3><br>
+                		 	
+                    <div class="mb-3"><label class="form-label" for="subject">Precio de venta de pollo</label><input class="form-control" type="number" step="0.01" name="precioVentaPollo" th:value="${granja.precioVentaPollo}" th:placeholder="${granja.precioVentaPollo}" min=0 max=9999999.99 required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Precio de compra de pollo</label><input class="form-control" type="number" step="0.01" th:value="${granja.precioCompraPollo}" name="precioCompraPollo" th:placeholder="${granja.precioCompraPollo}" min=0 max=9999999.99 required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Dias de vida al comprar el pollo</label><input class="form-control" type="number" th:value="${granja.diasDeCompraPollo}" name="diasDeCompraPollo" th:placeholder="${granja.diasDeCompraPollo}" min=0 max=9999999 required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Dias en morir</label><input class="form-control" type="number" th:value="${granja.diasPolloEnMorir}" name="diasPolloEnMorir" th:placeholder="${granja.diasPolloEnMorir}" min=1 max=9999999 required></div>                    
                     <div class="mb-3"><label class="form-label" for="subject">Dias en poner un huevo</label><input class="form-control" type="number" th:value="${granja.diasPolloEnPonerHuevo}" name="diasPolloEnPonerHuevo" th:placeholder="${granja.diasPolloEnPonerHuevo}" min=1 max=9999999 required></div>
-                    <div class="mb-3"><label class="form-label" for="subject">Capacidad de pollos</label><input class="form-control" type="number" th:value="${granja.capacidadPollos}" name="capacidadPollos" th:placeholder="${granja.capacidadPollos}" min=0 max=9999999 required></div>                    
+                    <div class="mb-3"><label class="form-label" for="subject">Capacidad de pollos</label><input class="form-control" type="number" th:value="${granja.capacidadPollos}" name="capacidadPollos" th:placeholder="${granja.capacidadPollos}" min=0 max=9999999 required></div>
                     
+                      
                     
-                    <div class="mb-3" style="border-top: 2px dashed rgba(191,217,244,0.49);padding-top: 10px;">
-                    <label class="form-label" for="subject">Precio de venta de huevo</label><input class="form-control" type="number" step="0.01" name="precioVentaHuevo" th:value="${granja.precioVentaHuevo}" th:placeholder="${granja.precioVentaHuevo}" min=0 max=9999999.99 required></div>
+                	 </div>
+                	 
+                	 <div id="derecha">
+                	 
+                	
+                	<h3 class="text-info">Huevo</h3><br>
+                	 	
+                    <div class="mb-3"><label class="form-label" for="subject">Precio de venta de huevo</label><input class="form-control" type="number" step="0.01" name="precioVentaHuevo" th:value="${granja.precioVentaHuevo}" th:placeholder="${granja.precioVentaHuevo}" min=0 max=9999999.99 required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Precio de compra de huevo</label><input class="form-control" type="number" step="0.01" th:value="${granja.precioCompraHuevo}" name="precioCompraHuevo" th:placeholder="${granja.precioCompraHuevo}" min=0 max=9999999.99 required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Dias de vida en compra de huevo</label><input class="form-control" type="number" th:value="${granja.diasDeCompraHuevo}" name="diasDeCompraHuevo" th:placeholder="${granja.diasDeCompraHuevo}" min=0 max=9999999 required></div>
                     <div class="mb-3"><label class="form-label" for="subject">Dias en eclosionar</label><input class="form-control" type="number" th:value="${granja.diasHuevoEnDarPollo}" name="diasHuevoEnDarPollo" th:placeholder="${granja.diasHuevoEnDarPollo}" min=0 max=9999999 required></div>                    
                     <div class="mb-3"><label class="form-label" for="subject">Capacidad de huevos</label><input class="form-control" type="number" th:value="${granja.capacidadHuevos}" name="capacidadHuevos" th:placeholder="${granja.capacidadHuevos}" min=0 max=9999999 required></div>
                     <div class="mb-3"></div>
+                	 </div>
+                	 
+                   	
+                   	
+                    	
+                     </div>
+                                        
+                  
+                        	 <br>
+                        	 <div id=containerBoton>
+                    
+                    <button   id="boton" class="btn btn-primary" type="submit">Actualizar</button>
+                    </div>
                     
                     
-                    
-                    <div class="mb-3"><button class="btn btn-primary" type="submit">Actualizar</button></div>
                     <small class="form-text text-danger" th:text="${errores}"></small>  
                 </form>
             </div>
