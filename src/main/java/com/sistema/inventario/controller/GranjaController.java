@@ -103,7 +103,7 @@ public class GranjaController {
 			
 						
 					
-			Granja granjaNueva=new Granja(granja.getId(), nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo);
+			Granja granjaNueva=new Granja(granja.getId(), nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo,1,2,3);
 			
 			
 			
