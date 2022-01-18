@@ -303,21 +303,21 @@ public class GranjaController {
 	{
 		List<Huevo> huevos= huevoRepository.findAll();
 		List<Pollo> pollos= polloRepository.findAll();
+		Granja granja=granjaRepository.findAll().get(0);
 				 
-		int polloMuere=5, polloPoneHuevo=1, huevoPonePollo=2;
-		
+				
 		for (Pollo pollo : pollos) {
 			
 			
 			
-			if(pollo.getDias()>=polloMuere)
+			if(pollo.getDias()>=granja.getDiasPolloEnMorir())
 				polloRepository.delete(pollo);
 			else
 			{
 				pollo.setDias(pollo.getDias()+1);
 				polloRepository.save(pollo);
 			}
-			if(pollo.getDias()%polloPoneHuevo==0)
+			if(pollo.getDias()%granja.getDiasPolloEnPonerHuevo()==0 && granja.getCapacidadHuevos()>huevos.size())
 				huevoRepository.save(new Huevo(0));	
 		}
 		
@@ -325,7 +325,7 @@ public class GranjaController {
 		for (Huevo huevo : huevos) {		
 			
 			
-			if(huevo.getDias()>=huevoPonePollo)
+			if(huevo.getDias()>=granja.getDiasHuevoEnDarPollo()  && granja.getCapacidadPollos()>pollos.size())
 			{
 				polloRepository.save(new Pollo(0));
 				huevoRepository.delete(huevo);
@@ -341,7 +341,7 @@ public class GranjaController {
 		}
 	
 		
-		model.addAttribute("granja", granjaRepository.findAll().get(0));
+		model.addAttribute("granja", granja);
 		return "redirect:/granja";
 	}
 	
