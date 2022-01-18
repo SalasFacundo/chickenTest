@@ -87,9 +87,12 @@ public class GranjaController {
 			long telefono= Long.parseLong(request.getParameter("telefono"));
 			
 			int capacidadPollos= Integer.parseInt(request.getParameter("capacidadPollos")),
-			capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos")),
-					diasCompraPollo= Integer.parseInt(request.getParameter("diasDeCompraPollo")),
-							diasCompraHuevo= Integer.parseInt(request.getParameter("diasDeCompraHuevo"));
+				capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos")),
+				diasCompraPollo= Integer.parseInt(request.getParameter("diasDeCompraPollo")),
+				diasCompraHuevo= Integer.parseInt(request.getParameter("diasDeCompraHuevo")),
+				diasPolloEnMorir= Integer.parseInt(request.getParameter("diasPolloEnMorir")),
+				diasPolloEnPonerHuevo= Integer.parseInt(request.getParameter("diasPolloEnPonerHuevo")),
+				diasHuevoEnDarPollo= Integer.parseInt(request.getParameter("diasHuevoEnDarPollo"));
 			
 			
 			String nombre= request.getParameter("nombre"),
@@ -103,7 +106,7 @@ public class GranjaController {
 			
 						
 					
-			Granja granjaNueva=new Granja(granja.getId(), nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo,1,2,3);
+			Granja granjaNueva=new Granja(granja.getId(), nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo,diasPolloEnMorir,diasPolloEnPonerHuevo,diasHuevoEnDarPollo);
 			
 			
 			
