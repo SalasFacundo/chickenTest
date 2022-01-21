@@ -54,7 +54,7 @@
                 </div>
                 <form action="procesarVenta" method="POST">
                 	<div class="mb-3"><label class="form-label" for="email">Dias de vida</label><input class="form-control" type="number" name="dias" min="0" required></div>
-                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad" min="0" required></div>
+                    <div class="mb-3"><label class="form-label" for="name">Cantidad</label><input class="form-control" type="number" name="cantidad" min="1" max="9999999" required></div>
                     <div class="mb-3"></div>                    
                     <div class="mb-3"><label class="form-label" for="email">Producto</label><select class="form-select" name="producto">
                             <option value="pollo" selected="">Pollo</option>

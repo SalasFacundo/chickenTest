@@ -142,7 +142,10 @@ public class GranjaController {
 			dias=Integer.parseInt(request.getParameter("dias"));	
 			String producto=request.getParameter("producto"),
 				   operacion=request.getParameter("operacion");
+			int cantidadDisponibleParaVender;
 		int i=0;
+		
+		
 		
 		Map<String,String> map=mapHuevos();
 			
@@ -153,11 +156,48 @@ public class GranjaController {
 			
 			if(map.get(String.valueOf(dias))==null)
 				errores.add("No se encuentran "+producto+"s de "+dias+" dias de vida");
-			else
+			else if(map.get(String.valueOf(dias))!=null)
 			{				
 				if(cantidad>Integer.valueOf(map.get(String.valueOf(dias))))				
 					errores.add("Se encuentran solo "+map.get(String.valueOf(dias))+" "+ producto+ " de "+dias+" dias");				
 			}
+			
+				if(producto.equals("pollo"))
+				{
+					
+					if(cantidad*granja.getPrecioVentaPollo()+granja.getDinero()>9999999.99)
+					{
+						
+					
+					cantidadDisponibleParaVender=(int) ( (9999999.99-granja.getDinero())/granja.getPrecioVentaPollo());
+					
+				
+					if(cantidadDisponibleParaVender==1)
+						errores.add("El monto supera el limite de recaudacion, puede vender "+ cantidadDisponibleParaVender + " pollo");
+					else
+						errores.add("El monto supera el limite de recaudacion, puede vender "+ cantidadDisponibleParaVender + " pollos");
+					
+					}
+				}
+					
+				else	
+				{
+					if(cantidad*granja.getPrecioVentaHuevo()+granja.getDinero()>9999999.99)
+					{
+						
+					
+						cantidadDisponibleParaVender=(int) ( (9999999.99-granja.getDinero())/granja.getPrecioVentaHuevo());
+						
+						if(cantidadDisponibleParaVender==1)
+							errores.add("El monto supera el limite de recaudacion, puede vender "+ cantidadDisponibleParaVender + " huevo");
+						else
+							errores.add("El monto supera el limite de recaudacion, puede vender "+ cantidadDisponibleParaVender + " huevos");
+					}
+				}				
+					
+			
+				
+			
 			
 			
 			model.addAttribute("granja",granja);
@@ -190,13 +230,13 @@ public class GranjaController {
 						}
 					}	
 				
-					granja.setDinero(granja.getDinero()+granja.getPrecioVentaHuevo()*cantidad);
+					granja.setDinero(granja.getDinero()+granja.getPrecioVentaPollo()*cantidad);
 				}
 				
 				
 				granjaRepository.save(granja);
 				
-				return "redirect:/vender";
+				return "redirect:/granja";
 			}
 				
 			
@@ -228,17 +268,44 @@ public class GranjaController {
 		
 			if(producto.equals("pollo"))
 			{
+				int cantidadParaComprar=(int) ( granja.getDinero()/granja.getPrecioCompraPollo());
+				
 				map=mapPollos();
 				
-				if(cantidad * granja.getPrecioCompraPollo() > granja.getDinero())				
-					errores.add("No dispone del dinero suficiente, puede comprar solo " +  granja.getDinero()/granja.getPrecioCompraPollo());
+				if(cantidad * granja.getPrecioCompraPollo() > granja.getDinero())	
+				{
+					if(cantidadParaComprar==1)					
+						errores.add("No dispone del dinero suficiente, puede comprar solo " + cantidadParaComprar + " pollo" );
+					else
+						errores.add("No dispone del dinero suficiente, puede comprar solo " + cantidadParaComprar + " pollos" );
+					
+				}
+				if(cantidad+polloRepository.findAll().size()>granja.getCapacidadPollos())
+				{
+					errores.add("La cantidad deseada supera el limite de almacenaje");
+				}
+					
 			}
 			else
 			{
+				int cantidadParaComprar=(int) ( granja.getDinero()/granja.getPrecioCompraHuevo());
 				map=mapHuevos();
 				
-				if(cantidad * granja.getPrecioCompraHuevo() > granja.getDinero())				
-					errores.add("No dispone del dinero suficiente, puede comprar solo " +  granja.getDinero()/granja.getPrecioCompraHuevo());
+				if(cantidad+huevoRepository.findAll().size()>granja.getCapacidadHuevos())
+				{
+					errores.add("La cantidad deseada supera el limite de almacenaje");
+				}
+				
+				else if(cantidad * granja.getPrecioCompraHuevo() > granja.getDinero())
+				{
+					if(cantidadParaComprar==1)					
+						errores.add("No dispone del dinero suficiente, puede comprar solo " + cantidadParaComprar + " "+producto );
+					else
+						errores.add("No dispone del dinero suficiente, puede comprar solo " + cantidadParaComprar + " "+producto+"s" );
+				}
+					
+								
+				
 				
 			}
 			
@@ -268,7 +335,7 @@ public class GranjaController {
 				}
 				
 				granjaRepository.save(granja);
-				return "redirect:/comprar";
+				return "redirect:/granja";
 			
 			}
 				
@@ -302,10 +369,14 @@ public class GranjaController {
 	public String pasarDia(Model model)
 	{
 		List<Huevo> huevos= huevoRepository.findAll();
-		List<Pollo> pollos= polloRepository.findAll();
+		List<Pollo> pollos= polloRepository.findAll();		
 		Granja granja=granjaRepository.findAll().get(0);
-				 
-				
+		
+		int huevosDisponibles=granja.getCapacidadHuevos()-huevos.size();
+		int pollosDisponibles=granja.getCapacidadPollos()-pollos.size();
+		int i=0;
+			 
+			
 		for (Pollo pollo : pollos) {
 			
 			
@@ -317,18 +388,25 @@ public class GranjaController {
 				pollo.setDias(pollo.getDias()+1);
 				polloRepository.save(pollo);
 			}
-			if(pollo.getDias()%granja.getDiasPolloEnPonerHuevo()==0 && granja.getCapacidadHuevos()>huevos.size())
-				huevoRepository.save(new Huevo(0));	
+			if(pollo.getDias()%granja.getDiasPolloEnPonerHuevo()==0 && i<huevosDisponibles)
+			{
+				huevoRepository.save(new Huevo(0));
+				i++;
+			}
+				
+			
+					
 		}
 		
-		
+		i=0;
 		for (Huevo huevo : huevos) {		
 			
 			
-			if(huevo.getDias()>=granja.getDiasHuevoEnDarPollo()  && granja.getCapacidadPollos()>pollos.size())
-			{
+			if(huevo.getDias()>=granja.getDiasHuevoEnDarPollo() && i<pollosDisponibles)
+			{				
 				polloRepository.save(new Pollo(0));
 				huevoRepository.delete(huevo);
+				i++;
 			}
 			
 			else
