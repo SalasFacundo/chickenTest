@@ -63,12 +63,6 @@ public class Granja {
 	private int diasHuevoEnDarPollo;
 	
 	
-	
-
-
-	
-
-	
 
 
 
@@ -130,41 +124,23 @@ public class Granja {
 		
 		this.id = id;
 	}
-
-
-
+	
 	public Granja() {
 		
 	}
-
 	
-	
-
-
-
-
 	public Long getId() {
 		return id;
 	}
-
-
-
-
 
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
-
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	
 
 	public void setNombre(String nombre) {
@@ -196,84 +172,39 @@ public class Granja {
 	}
 
 
-
-
-
-
 	public double getPrecioVentaPollo() {
 		return precioVentaPollo;
 	}
-
-
-
-
-
 
 	public void setPrecioVentaPollo(double precioVentaPollo) {
 		this.precioVentaPollo = precioVentaPollo;
 	}
 
 
-
-
-
-
 	public double getPrecioVentaHuevo() {
 		return precioVentaHuevo;
 	}
-
-
-
-
-
 
 	public void setPrecioVentaHuevo(double precioVentaHuevo) {
 		this.precioVentaHuevo = precioVentaHuevo;
 	}
 
-	
-
-
-
-
 	public long getTelefono() {
 		return telefono;
 	}
-
-
-
-
-
-
 
 	public void setTelefono(long telefono) {
 		this.telefono = telefono;
 	}
 
 
-
-
-
-
-
 	public String getDireccion() {
 		return direccion;
 	}
 
-
-
-
-
-
-
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
-
-
-	
-
 
 
 	public double getPrecioCompraPollo() {
@@ -281,15 +212,9 @@ public class Granja {
 	}
 
 
-
-
-
 	public void setPrecioCompraPollo(double precioCompraPollo) {
 		this.precioCompraPollo = precioCompraPollo;
 	}
-
-
-
 
 
 	public double getPrecioCompraHuevo() {
@@ -297,15 +222,10 @@ public class Granja {
 	}
 
 
-
-
-
 	public void setPrecioCompraHuevo(double precioCompraHuevo) {
 		this.precioCompraHuevo = precioCompraHuevo;
 	}
 
-
-	
 
 
 	public int getDiasDeCompraPollo() {
@@ -314,24 +234,9 @@ public class Granja {
 
 
 
-
-
-
-
-
-
-
 	public void setDiasDeCompraPollo(int diasDeCompraPollo) {
 		this.diasDeCompraPollo = diasDeCompraPollo;
 	}
-
-
-
-
-
-
-
-
 
 
 	public int getDiasDeCompraHuevo() {
@@ -339,81 +244,35 @@ public class Granja {
 	}
 
 
-
-
-
-
-
-
-
-
 	public void setDiasDeCompraHuevo(int diasDeCompraHuevo) {
 		this.diasDeCompraHuevo = diasDeCompraHuevo;
 	}
 
 	
-	
-
-
-
-
-
-
-
-
 	public int getDiasPolloEnMorir() {
 		return diasPolloEnMorir;
 	}
-
-
-
-
 
 
 	public void setDiasPolloEnMorir(int diasPolloEnMorir) {
 		this.diasPolloEnMorir = diasPolloEnMorir;
 	}
 
-
-
-
-
-
 	public int getDiasPolloEnPonerHuevo() {
 		return diasPolloEnPonerHuevo;
 	}
-
-
-
-
-
 
 	public void setDiasPolloEnPonerHuevo(int diasPolloEnPonerHuevo) {
 		this.diasPolloEnPonerHuevo = diasPolloEnPonerHuevo;
 	}
 
-
-
-
-
-
 	public int getDiasHuevoEnDarPollo() {
 		return diasHuevoEnDarPollo;
 	}
 
-
-
-
-
-
 	public void setDiasHuevoEnDarPollo(int diasHuevoEnDarPollo) {
 		this.diasHuevoEnDarPollo = diasHuevoEnDarPollo;
 	}
-
-
-
-
-
 
 	@Override
 	public String toString() {

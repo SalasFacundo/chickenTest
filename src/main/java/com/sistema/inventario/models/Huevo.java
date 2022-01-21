@@ -27,8 +27,6 @@ public class Huevo {
 	}
 
 
-	
-
 	public Huevo(Long id, int dias) {
 		
 		this.id = id;
@@ -42,15 +40,10 @@ public class Huevo {
 	
 	
 
-
-
-
 	public Huevo(int dias) {
 		
 		this.dias = dias;
 	}
-
-
 
 
 	public Long getId() {
@@ -58,13 +51,9 @@ public class Huevo {
 	}
 
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 
 	public int getDias() {
@@ -72,23 +61,15 @@ public class Huevo {
 	}
 
 
-
-
 	public void setDias(int dias) {
 		this.dias = dias;
 	}
-
-
 
 
 	@Override
 	public String toString() {
 		return "Huevo [id=" + id + ", dias=" + dias + "]";
 	}
-	
-	
-	
-	
 	
 	
 

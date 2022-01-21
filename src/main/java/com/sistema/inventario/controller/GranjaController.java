@@ -39,6 +39,8 @@ public class GranjaController {
 	
 	@Autowired
 	private IPolloRepository polloRepository;
+	
+
 
 	
 	
@@ -46,16 +48,16 @@ public class GranjaController {
 	@GetMapping(value = "/granja")
 	public String granja(Model model)
 	{
-		Granja granja= granjaRepository.findAll().get(0);
+		Granja granja= granjaRepository.findAll().get(0);		//Recibo solo el primer objeto de la lista que recibe la base de datos, ya que siempre habra una sola granja
 		
 		int cantidadPollos=polloRepository.findAll().size(),
-			cantidadHuevos= huevoRepository.findAll().size();
+			cantidadHuevos= huevoRepository.findAll().size();	
 		
-		model.addAttribute("cantidadPollos", cantidadPollos);
+		model.addAttribute("cantidadPollos", cantidadPollos);	//cantidad de pollos y huevos los adjunto separado a granja, ya que son tablas distintas.
 		model.addAttribute("cantidadHuevos", cantidadHuevos);
 		
-		model.addAttribute("granja", granja);
-		return "granja";
+		model.addAttribute("granja", granja);					//adjunto el objeto de granja con todos sus datos para poder usarlos en el template
+		return "granja";										//llamo al template granja.html
 	}
 	
 	@GetMapping({"/index","/","", "/home"})
@@ -75,7 +77,7 @@ public class GranjaController {
 	}
 	
 	@PostMapping(value="/procesarModificarGranja")
-	public String procesarModificarGranja(HttpServletRequest request, Model model)
+	public String procesarModificarGranja(HttpServletRequest request, Model model)			//uso HttpServletRequest para recibir los datos del formulario
 	{	
 		List<String> errores= new ArrayList<>();
 		Granja granja= granjaRepository.findAll().get(0);
@@ -84,7 +86,7 @@ public class GranjaController {
 		String producto="";
 		
 		try {
-			long telefono= Long.parseLong(request.getParameter("telefono"));
+			long telefono= Long.parseLong(request.getParameter("telefono"));							//Recibo los datos del formulario
 			
 			int capacidadPollos= Integer.parseInt(request.getParameter("capacidadPollos")),
 				capacidadHuevos= Integer.parseInt(request.getParameter("capacidadHuevos")),
@@ -105,14 +107,14 @@ public class GranjaController {
 					precioCompraHuevo=Double.parseDouble((request.getParameter("precioCompraHuevo")));
 			
 						
-					
+																												//Creo el objeto nuevo de granja
 			Granja granjaNueva=new Granja(granja.getId(), nombre, telefono, direccion, dinero, capacidadHuevos, capacidadPollos, precioVentaPollo, precioVentaHuevo, precioCompraPollo, precioCompraHuevo, diasCompraPollo, diasCompraHuevo,diasPolloEnMorir,diasPolloEnPonerHuevo,diasHuevoEnDarPollo);
 			
 			
 			
-			granjaRepository.save(granjaNueva);
+			granjaRepository.save(granjaNueva);																	//Actualizo en la base de datos
 		} catch (Exception e) {
-			model.addAttribute("errores", "Ingrese valores validos");
+			model.addAttribute("errores", "Ingrese valores validos");											//Si sucede un error a pesar de las validaciones html, mostrata el error sin romper
 			model.addAttribute("granja", granja);
 			return "modificarGranja";
 		}
@@ -140,36 +142,37 @@ public class GranjaController {
 		Granja granja= granjaRepository.findAll().get(0);
 		int cantidad=Integer.parseInt(request.getParameter("cantidad")), 
 			dias=Integer.parseInt(request.getParameter("dias"));	
-			String producto=request.getParameter("producto"),
-				   operacion=request.getParameter("operacion");
-			int cantidadDisponibleParaVender;
-		int i=0;
+		String producto=request.getParameter("producto"),
+			   peracion=request.getParameter("operacion");
+		
+		int cantidadDisponibleParaVender, i=0;
+		
+		final double limiteDinero=9999999.99;												//Uso constante para limite de dinero recaudado en granja
 		
 		
 		
-		Map<String,String> map=mapHuevos();
+		Map<String,String> map=mapHuevos();													//llamo al metodo que devuelve el mapa de huevos organizado por dias y cantidad
 			
 		
 			if(producto.equals("pollo"))			
 				map=mapPollos();
 			
 			
-			if(map.get(String.valueOf(dias))==null)
+			if(map.get(String.valueOf(dias))==null)											//Si al buscar en el map por la key, devuelve null entonces no se encuentran pollos de esos dias de vida
 				errores.add("No se encuentran "+producto+"s de "+dias+" dias de vida");
-			else if(map.get(String.valueOf(dias))!=null)
+			else 
 			{				
-				if(cantidad>Integer.valueOf(map.get(String.valueOf(dias))))				
+				if(cantidad>Integer.valueOf(map.get(String.valueOf(dias))))					//Si la cantidad solicitada es mayor de la disponible muestra un mensaje diciendo cuantos hay			
 					errores.add("Se encuentran solo "+map.get(String.valueOf(dias))+" "+ producto+ " de "+dias+" dias");				
 			}
 			
 				if(producto.equals("pollo"))
 				{
 					
-					if(cantidad*granja.getPrecioVentaPollo()+granja.getDinero()>9999999.99)
-					{
-						
+					if(cantidad*granja.getPrecioVentaPollo()+granja.getDinero()>limiteDinero)		//calculo el valor de lo que recaudaria la venta para saber si supera el limite
+					{						
 					
-					cantidadDisponibleParaVender=(int) ( (9999999.99-granja.getDinero())/granja.getPrecioVentaPollo());
+					cantidadDisponibleParaVender=(int) ( (limiteDinero-granja.getDinero())/granja.getPrecioVentaPollo());		//calculo cuantos productos se pueden vender sin superar el limite de dinero
 					
 				
 					if(cantidadDisponibleParaVender==1)
@@ -182,11 +185,11 @@ public class GranjaController {
 					
 				else	
 				{
-					if(cantidad*granja.getPrecioVentaHuevo()+granja.getDinero()>9999999.99)
+					if(cantidad*granja.getPrecioVentaHuevo()+granja.getDinero()>limiteDinero)
 					{
 						
 					
-						cantidadDisponibleParaVender=(int) ( (9999999.99-granja.getDinero())/granja.getPrecioVentaHuevo());
+						cantidadDisponibleParaVender=(int) ( (limiteDinero-granja.getDinero())/granja.getPrecioVentaHuevo());
 						
 						if(cantidadDisponibleParaVender==1)
 							errores.add("El monto supera el limite de recaudacion, puede vender "+ cantidadDisponibleParaVender + " huevo");
@@ -204,13 +207,13 @@ public class GranjaController {
 			model.addAttribute("errores", errores);
 			
 			
-			if(errores.isEmpty())
+			if(errores.isEmpty())																					//Si la lista donde se almacenan los errores esta vacia entonces se procede a hacer la operacion
 			{
 				if(producto.equals("huevo"))
 				{
 					for (Huevo huevo : huevoRepository.findAll()) {
 						
-						if(huevo.getDias()==dias && i<cantidad)
+						if(huevo.getDias()==dias && i<cantidad)														//Elimino los huevos que se venden segun el dia elegido
 						{
 							huevoRepository.delete(huevo);
 							i++;
@@ -261,14 +264,14 @@ public class GranjaController {
 		Granja granja= granjaRepository.findAll().get(0);
 		int cantidad=Integer.parseInt(request.getParameter("cantidad")); 			
 			String producto=request.getParameter("producto");
-		int i=0;
+		int cantidadParaComprar, i=0;
 		
 		Map<String,String> map=null;
 			
 		
 			if(producto.equals("pollo"))
 			{
-				int cantidadParaComprar=(int) ( granja.getDinero()/granja.getPrecioCompraPollo());
+				 cantidadParaComprar=(int) ( granja.getDinero()/granja.getPrecioCompraPollo());
 				
 				map=mapPollos();
 				
@@ -288,7 +291,7 @@ public class GranjaController {
 			}
 			else
 			{
-				int cantidadParaComprar=(int) ( granja.getDinero()/granja.getPrecioCompraHuevo());
+				 cantidadParaComprar=(int) ( granja.getDinero()/granja.getPrecioCompraHuevo());
 				map=mapHuevos();
 				
 				if(cantidad+huevoRepository.findAll().size()>granja.getCapacidadHuevos())
@@ -372,12 +375,12 @@ public class GranjaController {
 		List<Pollo> pollos= polloRepository.findAll();		
 		Granja granja=granjaRepository.findAll().get(0);
 		
-		int huevosDisponibles=granja.getCapacidadHuevos()-huevos.size();
+		int huevosDisponibles=granja.getCapacidadHuevos()-huevos.size();	//calculo el espacio disponible
 		int pollosDisponibles=granja.getCapacidadPollos()-pollos.size();
 		int i=0;
 			 
 			
-		for (Pollo pollo : pollos) {
+		for (Pollo pollo : pollos) {										//primero recorro la lista de los pollos para saber cual tiene que morir, y cual poner un huevo
 			
 			
 			
@@ -385,11 +388,11 @@ public class GranjaController {
 				polloRepository.delete(pollo);
 			else
 			{
-				pollo.setDias(pollo.getDias()+1);
+				pollo.setDias(pollo.getDias()+1);							//a todos los pollos se les incrementa un dia de vida
 				polloRepository.save(pollo);
 			}
-			if(pollo.getDias()%granja.getDiasPolloEnPonerHuevo()==0 && i<huevosDisponibles)
-			{
+			if(pollo.getDias()%granja.getDiasPolloEnPonerHuevo()==0 && i<huevosDisponibles)				//usé el porcentaje para saber cada cuantos dias pone un huevo, por ejemplo, si pone huevo cada 5 dias
+			{																							//entonces va a poner un huevo siempre que el dia sea multiplo de 5, y no supere la capacidad
 				huevoRepository.save(new Huevo(0));
 				i++;
 			}
@@ -399,7 +402,7 @@ public class GranjaController {
 		}
 		
 		i=0;
-		for (Huevo huevo : huevos) {		
+		for (Huevo huevo : huevos) {									//segundo recorro la lista de los huevos para saber cual tiene que dar un pollo, sin superar el limite de pollos
 			
 			
 			if(huevo.getDias()>=granja.getDiasHuevoEnDarPollo() && i<pollosDisponibles)
@@ -429,10 +432,10 @@ public class GranjaController {
 	{
 		Map<String, String> huevosPorDia = new HashMap<String, String>();
 		
-		 for (String valor : huevoRepository.cantidadDias()) {
+		 for (String valor : huevoRepository.cantidadDias()) {					//la query usada en la interfaz retorna una lista de String de formato "diasDeVida,cantidad"
 			 
-			 String[] parts = valor.split(",");
-			 huevosPorDia.put(parts[0], parts[1]);
+			 String[] parts = valor.split(",");									//divido el string en 2, usando la coma
+			 huevosPorDia.put(parts[0], parts[1]);								//la parte de la izquierda (diasDeVida) la uso como key, y la parde la derecha (cantidad) la uso como value
 		}		 
 		 
 		 return huevosPorDia;
