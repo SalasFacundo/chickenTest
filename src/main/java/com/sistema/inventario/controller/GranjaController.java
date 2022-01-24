@@ -446,7 +446,7 @@ public class GranjaController {
 		
 		 for (String valor : huevoRepository.cantidadDias()) {					//la query usada en la interfaz retorna una lista de String de formato "diasDeVida,cantidad"
 			 
-			 String[] parts = valor.split(",");									//divido el string en 2, usando la coma
+			 String[] parts = valor.split(",");									//divido el string en 2, usando la coma como divisor
 			 huevosPorDia.put(parts[0], parts[1]);								//la parte de la izquierda (diasDeVida) la uso como key, y la parde la derecha (cantidad) la uso como value
 		}		 
 		 
