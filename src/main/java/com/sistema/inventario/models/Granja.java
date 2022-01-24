@@ -56,28 +56,23 @@ public class Granja {
 	@Column(name="diasDeCompraHuevo", length=50, nullable=false)	
 	private int diasDeCompraHuevo;
 	
+	@Column(name="diasPolloEnMorir", length=50, nullable=false)	
+	private int diasPolloEnMorir;
+	
+	@Column(name="diasPolloEnPonerHuevo", length=50, nullable=false)	
+	private int diasPolloEnPonerHuevo;
+	
+	@Column(name="diasHuevoEnDarPollo", length=50, nullable=false)	
+	private int diasHuevoEnDarPollo;
 	
 	
-
-
-	
-
-	
-
-
-
-
-
-
-	
-
-
 
 
 
 	public Granja(Long id, String nombre, long telefono, String direccion, double dinero, int capacidadHuevos,
 			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
-			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
+			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo, int diasPolloEnMorir,
+			int diasPolloEnPonerHuevo, int diasHuevoEnDarPollo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -94,21 +89,21 @@ public class Granja {
 		this.precioCompraHuevo = precioCompraHuevo;
 		this.diasDeCompraPollo = diasDeCompraPollo;
 		this.diasDeCompraHuevo = diasDeCompraHuevo;
+		this.diasPolloEnMorir = diasPolloEnMorir;
+		this.diasPolloEnPonerHuevo = diasPolloEnPonerHuevo;
+		this.diasHuevoEnDarPollo = diasHuevoEnDarPollo;
 	}
 
 
 
 
-	
-
-	
-
 
 
 	public Granja(String nombre, long telefono, String direccion, double dinero, int capacidadHuevos,
 			int capacidadPollos, double precioVentaPollo, double precioVentaHuevo, double precioCompraPollo,
-			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo) {
-		super();
+			double precioCompraHuevo, int diasDeCompraPollo, int diasDeCompraHuevo, int diasPolloEnMorir,
+			int diasPolloEnPonerHuevo, int diasHuevoEnDarPollo) {
+		
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -121,12 +116,10 @@ public class Granja {
 		this.precioCompraHuevo = precioCompraHuevo;
 		this.diasDeCompraPollo = diasDeCompraPollo;
 		this.diasDeCompraHuevo = diasDeCompraHuevo;
+		this.diasPolloEnMorir = diasPolloEnMorir;
+		this.diasPolloEnPonerHuevo = diasPolloEnPonerHuevo;
+		this.diasHuevoEnDarPollo = diasHuevoEnDarPollo;
 	}
-
-
-
-
-
 
 
 
@@ -137,41 +130,22 @@ public class Granja {
 		this.id = id;
 	}
 
-
-
-
 	public Granja() {
 		
 	}
-
 	
-	
-
-
-
-
 	public Long getId() {
 		return id;
 	}
-
-
-
-
 
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
-
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	
 
 	public void setNombre(String nombre) {
@@ -203,85 +177,40 @@ public class Granja {
 	}
 
 
-
-
-
-
 	public double getPrecioVentaPollo() {
 		return precioVentaPollo;
 	}
-
-
-
-
-
 
 	public void setPrecioVentaPollo(double precioVentaPollo) {
 		this.precioVentaPollo = precioVentaPollo;
 	}
 
 
-
-
-
-
 	public double getPrecioVentaHuevo() {
 		return precioVentaHuevo;
 	}
-
-
-
-
-
 
 	public void setPrecioVentaHuevo(double precioVentaHuevo) {
 		this.precioVentaHuevo = precioVentaHuevo;
 	}
 
 
-	
-
-
-
-
 	public long getTelefono() {
 		return telefono;
 	}
-
-
-
-
-
-
 
 	public void setTelefono(long telefono) {
 		this.telefono = telefono;
 	}
 
 
-
-
-
-
-
 	public String getDireccion() {
 		return direccion;
 	}
 
-
-
-
-
-
-
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
-
-
-	
-
 
 
 	public double getPrecioCompraPollo() {
@@ -289,15 +218,9 @@ public class Granja {
 	}
 
 
-
-
-
 	public void setPrecioCompraPollo(double precioCompraPollo) {
 		this.precioCompraPollo = precioCompraPollo;
 	}
-
-
-
 
 
 	public double getPrecioCompraHuevo() {
@@ -305,15 +228,10 @@ public class Granja {
 	}
 
 
-
-
-
 	public void setPrecioCompraHuevo(double precioCompraHuevo) {
 		this.precioCompraHuevo = precioCompraHuevo;
 	}
 
-
-	
 
 
 	public int getDiasDeCompraPollo() {
@@ -322,24 +240,9 @@ public class Granja {
 
 
 
-
-
-
-
-
-
-
 	public void setDiasDeCompraPollo(int diasDeCompraPollo) {
 		this.diasDeCompraPollo = diasDeCompraPollo;
 	}
-
-
-
-
-
-
-
-
 
 
 	public int getDiasDeCompraHuevo() {
@@ -347,26 +250,35 @@ public class Granja {
 	}
 
 
-
-
-
-
-
-
-
-
 	public void setDiasDeCompraHuevo(int diasDeCompraHuevo) {
 		this.diasDeCompraHuevo = diasDeCompraHuevo;
 	}
 
+	
+	public int getDiasPolloEnMorir() {
+		return diasPolloEnMorir;
+	}
 
 
+	public void setDiasPolloEnMorir(int diasPolloEnMorir) {
+		this.diasPolloEnMorir = diasPolloEnMorir;
+	}
 
+	public int getDiasPolloEnPonerHuevo() {
+		return diasPolloEnPonerHuevo;
+	}
 
+	public void setDiasPolloEnPonerHuevo(int diasPolloEnPonerHuevo) {
+		this.diasPolloEnPonerHuevo = diasPolloEnPonerHuevo;
+	}
 
+	public int getDiasHuevoEnDarPollo() {
+		return diasHuevoEnDarPollo;
+	}
 
-
-
+	public void setDiasHuevoEnDarPollo(int diasHuevoEnDarPollo) {
+		this.diasHuevoEnDarPollo = diasHuevoEnDarPollo;
+	}
 
 
 	@Override
@@ -376,9 +288,17 @@ public class Granja {
 				+ ", dinero=" + dinero + ", capacidadHuevos=" + capacidadHuevos + ", capacidadPollos=" + capacidadPollos
 				+ ", precioVentaPollo=" + precioVentaPollo + ", precioVentaHuevo=" + precioVentaHuevo
 				+ ", precioCompraPollo=" + precioCompraPollo + ", precioCompraHuevo=" + precioCompraHuevo
-				+ ", diasDeCompraPollo=" + diasDeCompraPollo + ", diasDeCompraHuevo=" + diasDeCompraHuevo + "]";
+				+ ", diasDeCompraPollo=" + diasDeCompraPollo + ", diasDeCompraHuevo=" + diasDeCompraHuevo
+				+ ", diasPolloEnMorir=" + diasPolloEnMorir + ", diasPolloEnPonerHuevo=" + diasPolloEnPonerHuevo
+				+ ", diasHuevoEnDarPollo=" + diasHuevoEnDarPollo + "]";
 	}
 
+
+
+
+
+
+	
 
 
 

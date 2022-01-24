@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Features - Brand</title>
+    <title>Detalles</title>
+    <link rel="shortcut icon" href="assets/img/scenery/icono.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -74,6 +75,8 @@
                         <p th:text="'Precio de venta: ' + ${granja.precioVentaPollo} "></p>
                         <p th:text="'Precio de compra: ' + ${granja.precioCompraPollo} "></p>
                         <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraPollo} "></p>
+                        <p th:text="'Dias en morir: ' + ${granja.diasPolloEnMorir} "></p>
+                        <p th:text="'Dias en poner un huevo: ' + ${granja.diasPolloEnPonerHuevo} "></p>
                         <br><br><br>
                     </div>
                     
@@ -91,6 +94,8 @@
                         <p th:text="'Precio de venta: ' + ${granja.precioVentaHuevo} "></p>
                         <p th:text="'Precio de compra: ' + ${granja.precioCompraHuevo} "></p>
                         <p th:text="'Dias de vida al comprar: ' + ${granja.diasDeCompraHuevo} "></p>
+
+                        <p th:text="'Dias en eclosionar: ' + ${granja.diasHuevoEnDarPollo} "></p>
 
                     </div>
                 </div>
